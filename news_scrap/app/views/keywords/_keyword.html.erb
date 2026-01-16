@@ -3,7 +3,6 @@
   <%= keyword.exeption %>
   <%= button_to toggle_alarm_keyword_path(keyword),
         method: :patch,
-        form: { data: { turbo: true } },
         class: "alarm-btn" do %>
     <%= keyword.on_alarm ? "🔔" : "🔕" %>
   <% end %>

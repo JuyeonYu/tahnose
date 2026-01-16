@@ -11,10 +11,10 @@ class KeywordsController < ApplicationController
     @keyword = Keyword.new(keyword_params)
 
     if @keyword.save
-      redirect_to keywords_path, notice: "Keyword created"
+      redirect_to keywords_path, notice: 'Keyword created'
     else
       render :new,
-      status: :unproccessable_entity
+             status: :unproccessable_entity
     end
   end
 
@@ -38,11 +38,7 @@ class KeywordsController < ApplicationController
     @keyword = Keyword.find(params[:id])
 
     @keyword.update!(on_alarm: !@keyword.on_alarm)
-
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to keywords_path }
-    end 
+    redirect_to keywords_path
   end
 
   private
