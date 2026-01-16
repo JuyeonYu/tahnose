@@ -1,0 +1,17 @@
+<h1><%= @keyword.title %></h1>
+<p>
+  <%= link_to "← 목록으로", keywords_path, class: "back-link" %>
+</p>
+
+<ul>
+    <% @articles.each do |article| %>
+        <li>
+            <%= link_to article[:originallink], target: "_blank", rel: "noopener noreferrer", class: "article-link" do %>
+                <small><%= relative_pub_date(article[:pubDate]) %></small><br>
+                <strong><%= render_article_html(article[:title]) %></strong><br>
+                <%= render_article_html(article[:description]) %><br>
+                <small><%= article[:originallink] %></small>
+            <% end %>
+        </li>
+    <% end %>
+</ul>

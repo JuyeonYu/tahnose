@@ -1,0 +1,7 @@
+<h1>staff</h1>
+<%= link_to "New Keyword", new_keyword_path %>
+<ul>
+    <% @keywords.each do |k| %>
+        <%= render partial: "keyword", locals: { keyword: k } %>
+    <% end %>
+</ul>

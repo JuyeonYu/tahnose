@@ -1,0 +1,10 @@
+<li id="<%= dom_id(keyword) %>">
+  <%= link_to keyword.title, keyword %>
+  <%= keyword.exeption %>
+  <%= button_to toggle_alarm_keyword_path(keyword),
+        method: :patch,
+        form: { data: { turbo: true } },
+        class: "alarm-btn" do %>
+    <%= keyword.on_alarm ? "🔔" : "🔕" %>
+  <% end %>
+</li>
