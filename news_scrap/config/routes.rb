@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  root "home#index"
+
   resources :keywords do
     member do
       patch :toggle_alarm
