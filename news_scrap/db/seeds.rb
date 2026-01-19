@@ -7,3 +7,19 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+require 'csv'
+
+def seed_csv(path, &block)
+  CSV.read(path, headers: true).map(&block)
+end
+
+Keyword.insert_all(
+  seed_csv('db/seeds/kospi100.csv') do |row|
+    {
+      title: row['title'],
+      created_at: Time.current,
+      updated_at: Time.current
+    }
+  end
+)
