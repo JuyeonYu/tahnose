@@ -177,3 +177,7 @@ build-iPhoneSimulator/
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,ruby,rails
 
+news_scrap/log/development.log
+news_scrap/tmp
+news_scrap/storage
+news_scrap/log
