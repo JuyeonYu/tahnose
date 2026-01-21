@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_16_043431) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_20_024558) do
+  create_table "company_news_stats", force: :cascade do |t|
+    t.integer "company_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "news_count", default: 0, null: false
+    t.date "news_date", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id", "news_date"], name: "index_company_news_stats_on_company_id_and_news_date", unique: true
+    t.index ["company_id"], name: "index_company_news_stats_on_company_id"
+    t.index ["news_date"], name: "index_company_news_stats_on_news_date"
+  end
+
   create_table "keywords", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "exeption"
@@ -18,4 +29,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_16_043431) do
     t.string "title"
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "company_news_stats", "companies"
 end
