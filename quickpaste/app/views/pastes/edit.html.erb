@@ -1,0 +1,10 @@
+<h1>Pastes#edit</h1>
+
+<h1>수정</h1>
+
+<%= render "form", paste: @paste %>
+
+<p>
+  <%= link_to "취소", paste_path(@paste) %> |
+  <%= link_to "목록", pastes_path %>
+</p>

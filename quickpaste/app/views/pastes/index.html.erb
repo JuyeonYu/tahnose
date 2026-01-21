@@ -1,0 +1,10 @@
+<h1>Pastes#index</h1>
+<p><%= link_to 'new paste', new_paste_path %></p>
+
+<% @pastes.each do |paste| %>
+    <div>
+        <%= paste.id %>
+        <%= link_to paste.content, paste %>
+    </div>
+<% end %>
+

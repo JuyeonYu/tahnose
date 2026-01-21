@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  expires_at: 2026-01-21 10:14:53
+  read_once_boolean: MyString
+  view_count: 1
+
+two:
+  content: MyText
+  expires_at: 2026-01-21 10:14:53
+  read_once_boolean: MyString
+  view_count: 1

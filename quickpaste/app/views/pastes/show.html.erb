@@ -1,0 +1,22 @@
+<h1>Pastes#show</h1>
+<h1>Paste #<%= @paste.id %></h1>
+
+<p>
+  view_count: <%= @paste.view_count %>
+  <% if @paste.expires_at.present? %>
+    | expires_at: <%= @paste.expires_at %>
+  <% end %>
+  
+</p>
+
+<hr>
+
+<pre><%= @paste.content %></pre>
+
+<hr>
+
+<p>
+  <%= link_to "수정", edit_paste_path(@paste) %> |
+  <%= link_to "삭제", paste_path(@paste), data: { turbo_method: :delete, turbo_confirm: "진짜 삭제?" } %> |
+  <%= link_to "목록", pastes_path %>
+</p>
