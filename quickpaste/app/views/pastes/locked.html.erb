@@ -1,0 +1,16 @@
+<h1>🔒 비밀글입니다</h1>
+
+<%= form_with url: unlock_paste_path(@paste), method: :post, local: true do |f| %>
+  <div>
+    <%= label_tag :password, "비밀번호" %>
+    <%= password_field_tag :password %>
+  </div>
+
+  <div>
+    <%= submit_tag "확인" %>
+  </div>
+<% end %>
+
+<% if flash[:alert].present? %>
+  <p><%= flash[:alert] %></p>
+<% end %>

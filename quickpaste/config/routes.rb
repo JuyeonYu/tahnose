@@ -16,5 +16,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :pastes
+  resources :pastes do
+    post :unlock, on: :member
+  end
 end

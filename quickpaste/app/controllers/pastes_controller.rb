@@ -9,6 +9,10 @@ class PastesController < ApplicationController
 
 
   def show
+    if @paste.locked? && !unlocked?(@paste)
+      render :locked, status: :unauthorized
+      return
+    end
     current_views = @paste.view_count.to_i
     @destroy_read_once_after_show = @paste.read_once && current_views >= 1
 
@@ -50,6 +54,18 @@ class PastesController < ApplicationController
     redirect_to pastes_path, notice: "게시글이 삭제되었습니다."
   end
 
+  def unlock
+    @paste = Paste.find(params[:id])
+
+    if @paste.authenticate(params[:password].to_s)
+      session[unlock_session_key(@paste)] = true
+      redirect_to @paste
+    else
+      flash.now[:alert] = "비밀번호가 올바르지 않습니다."
+      render :locked, status: :unauthorized
+    end
+  end
+
 
   private
 
@@ -61,12 +77,22 @@ class PastesController < ApplicationController
     params.require(:paste).permit(
       :content,
       :expires_at,
-      :read_once
+      :read_once,
+      :password,
+      :password_confirmation
     )
   end
 
 
   def destroy_read_once_paste_after_show
     @paste.destroy
+  end
+
+  def unlocked?(paste)
+    session[unlock_session_key(paste)] == true
+  end
+
+  def unlock_session_key(paste)
+    'paste_unlocked_#{paste.id}'
   end
 end

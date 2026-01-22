@@ -4,7 +4,8 @@
 <% @pastes.each do |paste| %>
     <div>
         <%= paste.id %>
-        <%= link_to paste.content, paste %>
+
+        <%= link_to paste.index_display_content, paste %>
     </div>
 <% end %>
 

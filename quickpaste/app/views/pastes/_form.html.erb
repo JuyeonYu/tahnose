@@ -17,6 +17,14 @@
   </div>
 
   <div>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+
+    <%= f.label :password_confirmation, "비밀번호 확인" %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div>
     <%= f.label :expires_at, "만료 시각(선택)" %><br>
     <%= f.datetime_local_field :expires_at %>
   </div>
