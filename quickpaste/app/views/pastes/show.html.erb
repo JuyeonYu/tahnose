@@ -16,7 +16,10 @@
 <hr>
 
 <p>
-  <%= link_to "수정", edit_paste_path(@paste) %> |
-  <%= link_to "삭제", paste_path(@paste), data: { turbo_method: :delete, turbo_confirm: "진짜 삭제?" } %> |
+  <% if @manage_mode %>
+    <%= link_to "수정", edit_paste_path(@paste) %> |
+    <%= link_to "삭제", paste_path(@paste), data: { turbo_method: :delete, turbo_confirm: "진짜 삭제?" } %> |
+  <% end %>
+  
   <%= link_to "목록", pastes_path %>
 </p>

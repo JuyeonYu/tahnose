@@ -1,5 +1,6 @@
 class PastesController < ApplicationController
-  before_action :set_paste, only: %i[show edit update destroy]
+  before_action :set_paste, only: %i[show edit update destroy manage]
+  before_action :require_manage_token!, only: %i[manage edit update destroy]
   after_action :destroy_read_once_paste_after_show, only: :show, if: -> { @destroy_read_once_after_show }
 
   # GET /pastes/new
@@ -73,6 +74,11 @@ class PastesController < ApplicationController
     end
   end
 
+  def manage
+    @manage_mode = true
+    render :show
+  end
+
 
   private
 
@@ -100,6 +106,25 @@ class PastesController < ApplicationController
   end
 
   def unlock_session_key(paste)
-    'paste_unlocked_#{paste.id}'
+    "paste_unlocked_#{paste.id}"
+  end
+
+  def require_manage_token!
+    token = params[:token].presence || session_manage_token_for(@paste)
+    unless @paste.valid_manage_token?(token)
+      render plain: "Unauthorized", status: :unauthorized
+      return
+    end
+    # 한 번 성공하면 세션에 저장해두면 UX가 좋아짐(매번 token 붙일 필요 없음)
+    store_session_manage_token(@paste, token) if params[:token].present?
+  end
+
+  def session_manage_token_for(paste)
+    session.dig(:manage_tokens, paste.id.to_s)
+  end
+
+  def store_session_manage_token(paste, token)
+    session[:manage_tokens] ||= {}
+    session[:manage_tokens][paste.id.to_s] = token
   end
 end
