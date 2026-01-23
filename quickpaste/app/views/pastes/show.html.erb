@@ -5,8 +5,7 @@
   view_count: <%= @paste.view_count %>
   <% if @paste.expires_at.present? %>
     | expires_at: <%= @paste.expires_at %>
-  <% end %>
-  
+  <% end %>  
 </p>
 
 <hr>
@@ -14,6 +13,16 @@
 <pre><%= @paste.content %></pre>
 
 <hr>
+
+<% if @paste.qr_image.attached? %>
+  <div class="qr">
+    <%= image_tag url_for(@paste.qr_image), alt: "QR Code" %>
+  </div>
+<% else %>
+  <div class="qr qr--empty">
+    QR 생성 중...
+  </div>
+<% end %>
 
 <p>
   <% if @manage_mode %>
