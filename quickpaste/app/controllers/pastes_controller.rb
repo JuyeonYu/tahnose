@@ -29,7 +29,14 @@ class PastesController < ApplicationController
     @paste = Paste.new(paste_params)
 
     if @paste.save
-      redirect_to @paste, notice: "게시글이 생성되었습니다."
+      token = @paste.ensure_manage_token!
+      @paste.save! if token.present?
+
+      # 관리 링크는 query로 전달 (예: /pastes/123/manage?token=...)
+      @manage_url = manage_paste_url(@paste, token: token)
+
+      flash[:manage_url] = @manage_url
+      redirect_to @paste, notice: "게시글이 생성되었습니다.", status: :see_other
     else
       render :new, status: :unprocessable_entity
     end

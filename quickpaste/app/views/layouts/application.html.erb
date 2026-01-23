@@ -24,6 +24,10 @@
   </head>
 
   <body>
+    <%= turbo_frame_tag 'flash' do %>
+      <%= render 'shared/flash' %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
