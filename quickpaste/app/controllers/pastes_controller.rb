@@ -5,9 +5,8 @@ class PastesController < ApplicationController
 
   # GET /pastes/new
   def index
-    @pastes = Paste.all
+    @pastes = Paste.order(created_at: :desc)
   end
-
 
   def show
     if @paste.locked? && !unlocked?(@paste)
