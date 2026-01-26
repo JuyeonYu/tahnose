@@ -12,6 +12,14 @@
 <% @pastes.each do |paste| %>
   <div>
     <%= link_to paste do %>
+      <% if paste.locked? %>
+        <span class="paste-lock">
+          <%= unlocked?(paste) ? "🔓" : "🔒" %>
+        </span>
+      <% end %>
+      <% if paste.read_once %>
+        <span class="paste-read-once">⏱️</span>
+      <% end %>
       [<%= paste.tag %>] <%= time_ago_in_words(paste.created_at) %> ago
     <% end %>
   </div>

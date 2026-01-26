@@ -49,10 +49,15 @@ class PastesController < ApplicationController
       render :locked, status: :unauthorized
       return
     end
-    current_views = @paste.view_count.to_i
-    @destroy_read_once_after_show = @paste.read_once && current_views >= 1
+
+    if @paste.read_once && !read_once_bypassed? && !read_once_confirmed?
+      @read_once_pending = true
+      render :show, status: :ok
+      return
+    end
 
     @paste.increment!(:view_count)
+    @destroy_read_once_after_show = @paste.read_once && !read_once_bypassed?
   end
 
   # GET /pastes/new
@@ -83,6 +88,7 @@ class PastesController < ApplicationController
     end
 
     if @paste.save
+      allow_owner_bypass!
       unless logged_in?
         token = @paste.ensure_manage_token!
         @paste.save! if token.present?
@@ -172,6 +178,18 @@ class PastesController < ApplicationController
 
   def unlock_session_key(paste)
     "paste_unlocked_#{paste.id}"
+  end
+
+  def read_once_confirmed?
+    params[:read_once_confirm].to_s == "1"
+  end
+
+  def read_once_bypassed?
+    logged_in? && @paste.owner_id == current_user.id
+  end
+
+  def allow_owner_bypass!
+    session[unlock_session_key(@paste)] = true if @paste.locked?
   end
 
   def require_manage_token!
