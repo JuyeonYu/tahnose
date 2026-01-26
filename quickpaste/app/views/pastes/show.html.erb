@@ -1,11 +1,8 @@
 <h1><%= @paste.tag %> · <%= @paste.created_at %></h1>
 
-<p>
-  view_count: <%= @paste.view_count %>
-  <% if @paste.expires_at.present? %>
-    | expires_at: <%= @paste.expires_at %>
-  <% end %>
-</p>
+<% if @paste.expires_at.present? %>
+  <p>expires_at: <%= @paste.expires_at %></p>
+<% end %>
 
 <hr>
 
