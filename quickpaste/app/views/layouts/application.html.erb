@@ -29,7 +29,7 @@
     <% end %>
 
     <header class="site-header">
-      <div class="site-actions">
+      <div class="container site-actions">
         <% if logged_in? %>
           <span class="current-user"><%= current_user.email %></span>
           <%= link_to "내 글", mine_pastes_path, class: "my-pastes-link" %>
@@ -40,6 +40,10 @@
       </div>
     </header>
 
-    <%= yield %>
+    <main class="page">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
   </body>
 </html>
