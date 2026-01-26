@@ -1,24 +1,27 @@
-# README
+# Quickpaste
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Overview
+- Paste creation with optional password lock and QR generation.
+- Magic-link login (email) with session-based auth.
+- "내 글" list for logged-in users (owner-based).
+- Pagination on the paste index (20 per page by default).
 
-Things you may want to cover:
+## Setup
+```bash
+bundle install
+bin/rails db:migrate
+bin/rails s
+```
 
-* Ruby version
+## Auth (Magic Link)
+- Login endpoint: `GET /login`, `POST /login`
+- Magic link callback: `GET /auth/magic?token=...`
+- Logout: `DELETE /logout`
 
-* System dependencies
+## Development Email
+- Uses `letter_opener` in development to open emails in the browser.
+- Update `config/environments/development.rb` if you want SMTP instead.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Notes
+- Anonymous pastes rely on the manage token for edit/delete access.
+- Logged-in pastes use owner permissions (manage token is not generated).
