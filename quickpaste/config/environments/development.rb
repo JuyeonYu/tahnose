@@ -37,8 +37,8 @@ Rails.application.configure do
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
 
-  # Preview emails in the browser instead of sending.
-  config.action_mailer.delivery_method = :letter_opener
+  # Preview emails in the browser instead of sending (override with USE_RESEND=true).
+  config.action_mailer.delivery_method = ENV["USE_RESEND"] == "true" ? :resend : :letter_opener
 
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
