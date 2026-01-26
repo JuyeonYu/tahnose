@@ -38,6 +38,10 @@ class LoginToken < ApplicationRecord
     active.find_by(token_digest: digest)
   end
 
+  def self.active_for_user(user)
+    active.where(user: user).order(expires_at: :desc).first
+  end
+
   # == Instance Methods
   def use!
     update!(used_at: Time.current)

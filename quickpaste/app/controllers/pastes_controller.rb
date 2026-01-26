@@ -1,4 +1,12 @@
 class PastesController < ApplicationController
+  helper_method :unlocked?
+  PASTE_CREATE_IP_LIMIT = 8
+  PASTE_CREATE_IP_PERIOD_SECONDS = 60
+  PASTE_CREATE_COOLDOWN_SECONDS = 20
+  SEARCH_IP_LIMIT = 15
+  SEARCH_IP_PERIOD_SECONDS = 60
+  SEARCH_MIN_QUERY_LENGTH = 2
+
   before_action :set_paste, only: %i[show edit update destroy manage]
   before_action :require_manage_token!, only: %i[manage edit update destroy]
   before_action :require_login!, only: :mine
@@ -7,7 +15,27 @@ class PastesController < ApplicationController
   # GET /pastes/new
   def index
     @query = params[:q].to_s
-    scope = Paste.unlocked.search(@query).order(created_at: :desc)
+
+    if @query.present?
+      if @query.length < SEARCH_MIN_QUERY_LENGTH
+        flash.now[:alert] = "검색어는 #{SEARCH_MIN_QUERY_LENGTH}자 이상 입력해주세요."
+        @pagy, @pastes = pagy(Paste.none)
+        render :index, status: :unprocessable_entity
+        return
+      end
+
+      @pagy, @pastes = pagy(Paste.none)
+      unless ip_rate_limit!(
+        scope: "search",
+        limit: SEARCH_IP_LIMIT,
+        period_seconds: SEARCH_IP_PERIOD_SECONDS,
+        view: :index
+      )
+        return
+      end
+    end
+
+    scope = Paste.search(@query).order(created_at: :desc)
     @pagy, @pastes = pagy(scope)
   end
 
@@ -36,6 +64,23 @@ class PastesController < ApplicationController
   def create
     @paste = Paste.new(paste_params)
     @paste.owner = current_user if logged_in?
+
+    unless ip_rate_limit!(
+      scope: "pastes_create",
+      limit: PASTE_CREATE_IP_LIMIT,
+      period_seconds: PASTE_CREATE_IP_PERIOD_SECONDS,
+      view: :new
+    )
+      return
+    end
+
+    unless session_cooldown!(
+      key: "pastes:create:last",
+      seconds: PASTE_CREATE_COOLDOWN_SECONDS,
+      view: :new
+    )
+      return
+    end
 
     if @paste.save
       unless logged_in?

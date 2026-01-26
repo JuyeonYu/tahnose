@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_27_031500) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_27_040000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -59,6 +59,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_27_031500) do
     t.string "user_agent"
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_login_tokens_on_user_id"
+  end
+
+  create_table "magic_link_requests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email", null: false
+    t.string "ip"
+    t.datetime "requested_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email", "requested_at"], name: "index_magic_link_requests_on_email_and_requested_at"
   end
 
   create_table "pastes", force: :cascade do |t|

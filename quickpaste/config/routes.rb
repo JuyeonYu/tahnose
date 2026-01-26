@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get "/login", to: "sessions#new", as: :login
   post "/login", to: "sessions#create"
+  post "/auth/magic_link", to: "sessions#create", as: :magic_link
+  post "/auth/magic_link/resend", to: "sessions#resend_magic_link", as: :magic_link_resend
   get "/auth/magic", to: "sessions#magic", as: :auth_magic
   delete "/logout", to: "sessions#destroy", as: :logout
 
