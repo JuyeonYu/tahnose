@@ -32,6 +32,7 @@
       <div class="site-actions">
         <% if logged_in? %>
           <span class="current-user"><%= current_user.email %></span>
+          <%= link_to "내 글", mine_pastes_path, class: "my-pastes-link" %>
           <%= button_to "로그아웃", logout_path, method: :delete %>
         <% else %>
           <%= link_to "로그인", login_path, class: "login-button" %>

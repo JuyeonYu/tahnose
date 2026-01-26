@@ -1,11 +1,17 @@
 class PastesController < ApplicationController
   before_action :set_paste, only: %i[show edit update destroy manage]
   before_action :require_manage_token!, only: %i[manage edit update destroy]
+  before_action :require_login!, only: :mine
   after_action :destroy_read_once_paste_after_show, only: :show, if: -> { @destroy_read_once_after_show }
 
   # GET /pastes/new
   def index
     @pastes = Paste.order(created_at: :desc)
+  end
+
+  def mine
+    @pastes = current_user.pastes.order(created_at: :desc)
+    render :mine
   end
 
   def show
@@ -27,16 +33,20 @@ class PastesController < ApplicationController
   # POST /pastes
   def create
     @paste = Paste.new(paste_params)
+    @paste.owner = current_user if logged_in?
 
     if @paste.save
-      token = @paste.ensure_manage_token!
-      @paste.save! if token.present?
+      unless logged_in?
+        token = @paste.ensure_manage_token!
+        @paste.save! if token.present?
 
-      # 관리 링크는 query로 전달 (예: /pastes/123/manage?token=...)
-      @manage_url = manage_paste_url(@paste, token: token)
+        # 관리 링크는 query로 전달 (예: /pastes/123/manage?token=...)
+        @manage_url = manage_paste_url(@paste, token: token)
+        flash[:manage_url] = "[주의]아래 링크로만 수정, 삭제가 가능합니다."
+      end
 
-      flash[:manage_url] = @manage_url
-      redirect_to @paste, notice: "게시글이 생성되었습니다.", status: :see_other
+      redirect_to @paste, notice: @manage_url, status: :see_other
+
     else
       render :new, status: :unprocessable_entity
     end

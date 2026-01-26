@@ -5,6 +5,7 @@ class Paste < ApplicationRecord
   validate :content_bytesize_within_limit
   has_secure_password validations: false
 
+  belongs_to :owner, class_name: "User", optional: true
   has_one_attached :qr_image
   after_commit :ensure_qr_image!, on: [ :create, :update ]
 

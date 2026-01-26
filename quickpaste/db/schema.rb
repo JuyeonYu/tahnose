@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_26_013945) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_27_021540) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -67,11 +67,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_26_013945) do
     t.datetime "expires_at"
     t.datetime "manage_token_created_at"
     t.string "manage_token_digest"
+    t.integer "owner_id"
     t.string "password_digest"
     t.boolean "read_once", default: false, null: false
     t.datetime "updated_at", null: false
     t.integer "view_count"
     t.index ["manage_token_digest"], name: "index_pastes_on_manage_token_digest", unique: true
+    t.index ["owner_id"], name: "index_pastes_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,4 +86,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_26_013945) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "identities", "users"
   add_foreign_key "login_tokens", "users"
+  add_foreign_key "pastes", "users", column: "owner_id"
 end

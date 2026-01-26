@@ -1,0 +1,9 @@
+<h1>내가 쓴 글</h1>
+<p><%= link_to "새 글 작성", new_paste_path %></p>
+
+<% @pastes.each do |paste| %>
+  <div>
+    <%= paste.id %>
+    <%= link_to paste.index_display_content, paste %>
+  </div>
+<% end %>
