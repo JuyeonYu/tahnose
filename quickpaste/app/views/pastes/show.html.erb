@@ -2,7 +2,14 @@
 
 <hr>
 
-<pre><%= @paste.body %></pre>
+<div data-controller="clipboard">
+  <div class="paste-actions">
+    <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
+      copy
+    </button>
+  </div>
+  <pre data-clipboard-target="content"><%= @paste.body %></pre>
+</div>
 
 <hr>
 

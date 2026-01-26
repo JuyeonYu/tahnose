@@ -240,3 +240,9 @@ turbo-frame#flash,
   border-radius: var(--radius-sm);
   color: var(--muted);
 }
+
+.paste-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-2);
+}
