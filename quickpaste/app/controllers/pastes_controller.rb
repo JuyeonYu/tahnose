@@ -6,7 +6,9 @@ class PastesController < ApplicationController
 
   # GET /pastes/new
   def index
-    @pagy, @pastes = pagy(Paste.order(created_at: :desc))
+    @query = params[:q].to_s
+    scope = Paste.unlocked.search(@query).order(created_at: :desc)
+    @pagy, @pastes = pagy(scope)
   end
 
   def mine
@@ -58,7 +60,7 @@ class PastesController < ApplicationController
 
   # PATCH /pastes/:id
   def update
-    if @paste.update(paste_params)
+    if @paste.update(paste_update_params)
       redirect_to @paste, notice: "게시글이 수정되었습니다."
     else
       render :edit, status: :unprocessable_entity
@@ -97,7 +99,18 @@ class PastesController < ApplicationController
 
   def paste_params
     params.require(:paste).permit(
-      :content,
+      :body,
+      :tag,
+      :expires_at,
+      :read_once,
+      :password,
+      :password_confirmation
+    )
+  end
+
+  def paste_update_params
+    params.require(:paste).permit(
+      :body,
       :expires_at,
       :read_once,
       :password,

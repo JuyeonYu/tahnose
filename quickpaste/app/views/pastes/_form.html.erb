@@ -12,9 +12,21 @@
   <% end %>
 
   <div>
-    <%= f.label :content %><br>
-    <%= f.text_area :content, rows: 10 %>
+    <%= f.label :body, "본문" %><br>
+    <%= f.text_area :body, rows: 10, required: true %>
   </div>
+
+  <% if paste.new_record? %>
+    <div>
+      <%= f.label :tag, "태그" %><br>
+      <%= f.text_field :tag, required: true, maxlength: 20 %>
+    </div>
+  <% else %>
+    <div>
+      <strong>태그</strong><br>
+      <%= paste.tag %>
+    </div>
+  <% end %>
 
   <div>
     <%= f.label :password %><br>

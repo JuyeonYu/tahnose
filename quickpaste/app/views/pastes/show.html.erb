@@ -1,16 +1,15 @@
-<h1>Pastes#show</h1>
-<h1>Paste #<%= @paste.id %></h1>
+<h1><%= @paste.tag %> · <%= @paste.created_at %></h1>
 
 <p>
   view_count: <%= @paste.view_count %>
   <% if @paste.expires_at.present? %>
     | expires_at: <%= @paste.expires_at %>
-  <% end %>  
+  <% end %>
 </p>
 
 <hr>
 
-<pre><%= @paste.content %></pre>
+<pre><%= @paste.body %></pre>
 
 <hr>
 

@@ -3,7 +3,8 @@
 
 <% @pastes.each do |paste| %>
   <div>
-    <%= paste.id %>
-    <%= link_to paste.index_display_content, paste %>
+    <%= link_to paste do %>
+      [<%= paste.tag %>] <%= time_ago_in_words(paste.created_at) %> ago
+    <% end %>
   </div>
 <% end %>

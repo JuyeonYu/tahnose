@@ -2,19 +2,29 @@ require "stringio"
 
 class Paste < ApplicationRecord
   MAX_QR_BYTES = 1200  # 시작값(예시). 운영하면서 조절
-  validate :content_bytesize_within_limit
+  validates :body, presence: true
+  validates :tag, presence: true, length: { maximum: 20 }
+  validate :body_bytesize_within_limit
   has_secure_password validations: false
 
   belongs_to :owner, class_name: "User", optional: true
   has_one_attached :qr_image
   after_commit :ensure_qr_image!, on: [ :create, :update ]
 
-  def locked?
-    password_digest.present?
+  before_validation :normalize_tag
+
+  scope :unlocked, -> { where(password_digest: [nil, ""]) }
+
+  def self.search(query)
+    q = query.to_s.strip
+    return all if q.blank?
+
+    pattern = "%#{ActiveRecord::Base.sanitize_sql_like(q.downcase)}%"
+    where("LOWER(tag) LIKE ?", pattern)
   end
 
-  def index_display_content
-    locked? ? "🔒 비밀글" : content
+  def locked?
+    password_digest.present?
   end
 
   def ensure_manage_token!
@@ -37,14 +47,14 @@ class Paste < ApplicationRecord
   end
 
   def ensure_qr_image!
-    return if content.blank?
+    return if body.blank?
 
-    # content가 변경되지 않았고 이미 qr_image가 있으면 재생성하지 않음
-    if persisted? && !saved_change_to_content? && qr_image.attached?
+    # body가 변경되지 않았고 이미 qr_image가 있으면 재생성하지 않음
+    if persisted? && !saved_change_to_body? && qr_image.attached?
       return
     end
 
-    png = build_qr_png(content)
+    png = build_qr_png(body)
 
     qr_image.attach(
       io: StringIO.new(png),
@@ -54,7 +64,7 @@ class Paste < ApplicationRecord
   rescue RQRCode::QRCodeRunTimeError => e
     Rails.logger.warn(
       "[Paste##{id}] QR generation failed: #{e.class}: #{e.message} " \
-      "(bytes=#{content.bytesize}, sample=#{content.to_s[0, 40].inspect})"
+      "(bytes=#{body.bytesize}, sample=#{body.to_s[0, 40].inspect})"
     )
     nil
   end
@@ -72,11 +82,15 @@ class Paste < ApplicationRecord
     ).to_s
   end
 
-  def content_bytesize_within_limit
-    return if content.blank?
+  def body_bytesize_within_limit
+    return if body.blank?
 
-    if content.bytesize > MAX_QR_BYTES
-      errors.add(:content, "은(는) #{MAX_QR_BYTES} bytes 이하여야 합니다. (현재: #{content.bytesize} bytes)")
+    if body.bytesize > MAX_QR_BYTES
+      errors.add(:body, "은(는) #{MAX_QR_BYTES} bytes 이하여야 합니다. (현재: #{body.bytesize} bytes)")
     end
+  end
+
+  def normalize_tag
+    self.tag = tag.to_s.strip.downcase.presence
   end
 end
