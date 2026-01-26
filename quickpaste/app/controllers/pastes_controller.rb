@@ -101,7 +101,6 @@ class PastesController < ApplicationController
     params.require(:paste).permit(
       :body,
       :tag,
-      :expires_at,
       :read_once,
       :password,
       :password_confirmation
@@ -111,7 +110,6 @@ class PastesController < ApplicationController
   def paste_update_params
     params.require(:paste).permit(
       :body,
-      :expires_at,
       :read_once,
       :password,
       :password_confirmation

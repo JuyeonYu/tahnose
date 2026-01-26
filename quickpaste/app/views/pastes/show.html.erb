@@ -1,9 +1,5 @@
 <h1><%= @paste.tag %> · <%= @paste.created_at %></h1>
 
-<% if @paste.expires_at.present? %>
-  <p>expires_at: <%= @paste.expires_at %></p>
-<% end %>
-
 <hr>
 
 <pre><%= @paste.body %></pre>
