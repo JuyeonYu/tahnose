@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
+  root "pastes#index"
+
   get "/login", to: "sessions#new", as: :login
   post "/login", to: "sessions#create"
   post "/auth/magic_link", to: "sessions#create", as: :magic_link
