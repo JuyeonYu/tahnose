@@ -6,7 +6,7 @@ class PastesController < ApplicationController
 
   # GET /pastes/new
   def index
-    @pastes = Paste.order(created_at: :desc)
+    @pagy, @pastes = pagy(Paste.order(created_at: :desc))
   end
 
   def mine
