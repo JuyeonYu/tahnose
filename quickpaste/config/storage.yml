@@ -6,17 +6,16 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+<% if Rails.env.production? %>
 r2:
   service: S3
-  access_key_id: <%= ENV["R2_ACCESS_KEY_ID"] %>
-  secret_access_key: <%= ENV["R2_SECRET_ACCESS_KEY"] %>
+  access_key_id: <%= ENV.fetch("R2_ACCESS_KEY_ID") %>
+  secret_access_key: <%= ENV.fetch("R2_SECRET_ACCESS_KEY") %>
   region: "auto"
-  bucket: <%= ENV["R2_BUCKET"] %>
-  endpoint: <%= ENV["R2_ENDPOINT"] %>
+  bucket: <%= ENV.fetch("R2_BUCKET") %>
+  endpoint: <%= ENV.fetch("R2_ENDPOINT") %>
   force_path_style: true
-  
-  request_checksum_calculation: "when_required"
-  response_checksum_validation: "when_required"
+<% end %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
