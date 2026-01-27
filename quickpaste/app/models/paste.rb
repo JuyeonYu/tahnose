@@ -61,7 +61,7 @@ class Paste < ApplicationRecord
       filename: "paste-#{id || 'new'}.png",
       content_type: "image/png"
     )
-  rescue RQRCode::QRCodeRunTimeError => e
+  rescue RQRCodeCore::QRCodeRunTimeError => e
     Rails.logger.warn(
       "[Paste##{id}] QR generation failed: #{e.class}: #{e.message} " \
       "(bytes=#{body.bytesize}, sample=#{body.to_s[0, 40].inspect})"
