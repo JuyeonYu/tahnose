@@ -154,6 +154,39 @@ form {
   margin-bottom: var(--space-2);
 }
 
+.pastes-header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.pastes-reload-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.pastes-reload-button:hover {
+  background: #f5f6fa;
+  border-color: #cfd6e3;
+}
+
+.pastes-reload-button:disabled {
+  cursor: not-allowed;
+  color: var(--muted);
+  border-color: #e3e6ef;
+  background: #fafbff;
+}
+
 .pastes-new-link {
   display: inline-flex;
   align-items: center;

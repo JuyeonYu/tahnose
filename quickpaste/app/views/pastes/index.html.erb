@@ -1,69 +1,23 @@
-<div class="pastes-header">
-  <h1><%= t("pastes.index.title") %></h1>
-  <%= link_to t("pastes.index.new_link"), new_paste_path, class: "pastes-new-link" %>
-</div>
-
-<%= form_with url: pastes_path, method: :get, local: true do |form| %>
-  <div class="pastes-search">
-    <%= form.label :q, t("pastes.index.search_label"), class: "pastes-search-label" %>
-    <div class="pastes-search-row">
-      <%= form.search_field :q, value: @query, placeholder: t("pastes.index.search_placeholder"), class: "pastes-search-field" %>
-      <%= form.submit t("common.actions.search"), class: "pastes-search-button" %>
+<div>
+  <div class="pastes-header">
+    <h1><%= t("pastes.index.title") %></h1>
+    <div class="pastes-header-actions">
+      <%= link_to t("pastes.index.reload"), url_for(q: @query.presence), class: "pastes-reload-button", data: { turbo_frame: "pastes_list" } %>
+      <%= link_to t("pastes.index.new_link"), new_paste_path, class: "pastes-new-link" %>
     </div>
   </div>
-<% end %>
 
-<div class="paste-list">
-  <% @pastes.each do |paste| %>
-    <% item_classes = ["paste-list-item"] %>
-    <% item_classes << "paste-list-item--masked" if paste.locked? || paste.read_once %>
-    <div class="<%= item_classes.join(" ") %>">
-      <%= link_to paste, class: "paste-list-link" do %>
-        <div class="paste-tags">
-          <% if paste.locked? %>
-            <span class="paste-lock">
-              <%= unlocked?(paste) ? "🔓" : "🔒" %>
-            </span>
-          <% end %>
-          <% if paste.read_once %>
-            <span class="paste-read-once">💣</span>
-          <% end %>
-          <span class="paste-tag-chip"><%= paste.tag %></span>
-        </div>
-        <% if paste.locked? %>
-          <div class="paste-preview paste-preview--masked"><%= t("pastes.index.locked_preview") %></div>
-        <% elsif paste.read_once %>
-          <div class="paste-preview paste-preview--masked"><%= t("pastes.index.read_once_preview") %></div>
-        <% else %>
-          <div class="paste-preview"><%= paste.body %></div>
-        <% end %>
-        <div class="paste-meta">
-          <div class="paste-meta-right">
-            <%= t("pastes.index.time_ago", time: time_ago_in_words(paste.created_at)) %>
-          </div>
-        </div>
-      <% end %>
+  <%= form_with url: pastes_path, method: :get, local: true do |form| %>
+    <div class="pastes-search">
+      <%= form.label :q, t("pastes.index.search_label"), class: "pastes-search-label" %>
+      <div class="pastes-search-row">
+        <%= form.search_field :q, value: @query, placeholder: t("pastes.index.search_placeholder"), class: "pastes-search-field" %>
+        <%= form.submit t("common.actions.search"), class: "pastes-search-button" %>
+      </div>
     </div>
   <% end %>
+
+  <turbo-frame id="pastes_list">
+    <%= render "list" %>
+  </turbo-frame>
 </div>
-
-<% if @pagy.pages > 1 %>
-  <% window_size = 5 %>
-  <% start_page = [@pagy.page - (window_size / 2), 1].max %>
-  <% end_page = [start_page + window_size - 1, @pagy.last].min %>
-  <% start_page = [end_page - window_size + 1, 1].max %>
-
-  <nav class="pagination">
-    <%= link_to t("pastes.index.prev"), url_for(page: @pagy.previous, q: @query.presence), class: "page-link", aria: { disabled: @pagy.previous.nil? } if @pagy.previous %>
-
-    <% (start_page..end_page).each do |page| %>
-      <% if page == @pagy.page %>
-        <span class="page-link current"><%= page %></span>
-      <% else %>
-        <%= link_to page, url_for(page: page, q: @query.presence), class: "page-link" %>
-      <% end %>
-    <% end %>
-
-    <%= link_to t("pastes.index.next"), url_for(page: @pagy.next, q: @query.presence), class: "page-link", aria: { disabled: @pagy.next.nil? } if @pagy.next %>
-  </nav>
-<% end %>

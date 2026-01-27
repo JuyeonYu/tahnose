@@ -59,6 +59,7 @@ ko:
       search_label: "검색"
       search_placeholder: "태그를 검색해보세요."
       new_link: "새로 만들기"
+      reload: "↻ 새로고침"
       prev: "이전"
       next: "다음"
       time_ago: "%{time} 전"

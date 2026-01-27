@@ -59,6 +59,7 @@ en:
       search_label: "Search"
       search_placeholder: "Tag or body"
       new_link: "New paste"
+      reload: "↻ Reload"
       prev: "Previous"
       next: "Next"
       time_ago: "%{time} ago"
