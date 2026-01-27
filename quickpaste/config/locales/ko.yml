@@ -38,10 +38,10 @@ ko:
       logged_out: "로그아웃되었습니다."
     pastes:
       search_too_short: "검색어는 %{count}자 이상 입력해주세요."
-      manage_link: "[주의]아래 링크로만 수정, 삭제가 가능합니다: %{url}"
-      created: "게시글이 생성되었습니다."
-      updated: "게시글이 수정되었습니다."
-      deleted: "게시글이 삭제되었습니다."
+      manage_link: "[주의] 아래 링크로만 수정, 삭제가 가능합니다. 이 링크는 재발급되지 않습니다.\n%{url}"
+      created: "생성되었습니다."
+      updated: "수정되었습니다."
+      deleted: "삭제되었습니다."
       invalid_password: "비밀번호가 올바르지 않습니다."
   sessions:
     new:
@@ -51,12 +51,15 @@ ko:
       resend_link: "로그인 링크 재전송"
   pastes:
     index:
-      title: "게시글"
+      title: "최신 붙여넣기"
       search_label: "검색"
-      search_placeholder: "태그 또는 본문"
+      search_placeholder: "태그를 검색해보세요."
       new_link: "새로 만들기"
       prev: "이전"
       next: "다음"
+      time_ago: "%{time} 전"
+      locked_preview: "비밀글입니다"
+      read_once_preview: "한 번만 읽을 수 있는 글입니다"
     new:
       title: "새 글"
     edit:
@@ -69,11 +72,15 @@ ko:
       body_placeholder: "내용 입력"
       tag_label: "태그"
       tag_placeholder: "검색용 태그 (예: 디바이스토큰, 테스트링크)"
+      read_once_warning: "이 링크를 아는 사람은 누구나 한 번 읽을 수 있습니다. 민감한 내용이라면 비밀번호를 설정하세요."
       password_label: "비밀번호"
+      password_option_label: "비밀번호로 보호"
       password_placeholder: "비밀글로 만들 때만 입력"
       password_confirmation_label: "비밀번호 확인"
       password_confirmation_placeholder: "비밀번호 재입력"
       read_once_label: "읽으면 바로 삭제"
+      byte_unit: "bytes"
+      recommended: "권장"
       errors_header: "%{count}개의 오류가 있습니다"
     show:
       read_once_warning: "이 글은 한 번만 읽을 수 있습니다. 확인을 누르면 바로 삭제됩니다."
@@ -111,3 +118,39 @@ ko:
         read_once: "읽으면 바로 삭제"
       user:
         email: "이메일"
+  datetime:
+    distance_in_words:
+      half_a_minute: "30초"
+      less_than_x_seconds:
+        one: "1초 미만"
+        other: "%{count}초 미만"
+      x_seconds:
+        one: "1초"
+        other: "%{count}초"
+      less_than_x_minutes:
+        one: "1분 미만"
+        other: "%{count}분 미만"
+      x_minutes:
+        one: "1분"
+        other: "%{count}분"
+      about_x_hours:
+        one: "약 1시간"
+        other: "약 %{count}시간"
+      x_days:
+        one: "1일"
+        other: "%{count}일"
+      about_x_months:
+        one: "약 1개월"
+        other: "약 %{count}개월"
+      x_months:
+        one: "1개월"
+        other: "%{count}개월"
+      about_x_years:
+        one: "약 1년"
+        other: "약 %{count}년"
+      over_x_years:
+        one: "1년 이상"
+        other: "%{count}년 이상"
+      almost_x_years:
+        one: "거의 1년"
+        other: "거의 %{count}년"

@@ -38,7 +38,7 @@ en:
       logged_out: "Logged out."
     pastes:
       search_too_short: "Please enter at least %{count} characters."
-      manage_link: "[Warning] Use only this link to edit or delete: %{url}"
+      manage_link: "[Warning] Only this link can edit or delete this paste. It cannot be reissued: %{url}"
       created: "Paste created."
       updated: "Paste updated."
       deleted: "Paste deleted."
@@ -57,6 +57,9 @@ en:
       new_link: "New paste"
       prev: "Previous"
       next: "Next"
+      time_ago: "%{time} ago"
+      locked_preview: "This paste is locked"
+      read_once_preview: "This paste can be read once"
     new:
       title: "New paste"
     edit:
@@ -69,11 +72,15 @@ en:
       body_placeholder: "Content"
       tag_label: "Tag"
       tag_placeholder: "Search tag (e.g., device-token, test-link)"
+      read_once_warning: "Anyone with this link can read it once. Enable a password if the content is sensitive."
       password_label: "Password"
+      password_option_label: "Protect with password"
       password_placeholder: "Only if you want to lock this paste"
       password_confirmation_label: "Password confirmation"
       password_confirmation_placeholder: "Re-enter password"
       read_once_label: "Delete after read"
+      byte_unit: "bytes"
+      recommended: "recommended"
       errors_header: "%{count} errors"
     show:
       read_once_warning: "This paste can be read once. It will be deleted after confirmation."
