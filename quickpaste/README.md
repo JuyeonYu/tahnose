@@ -25,3 +25,7 @@ bin/rails s
 ## Notes
 - Anonymous pastes rely on the manage token for edit/delete access.
 - Logged-in pastes use owner permissions (manage token is not generated).
+
+## Analytics (GA4)
+- Set `GA_MEASUREMENT_ID` in production to enable GA4 tracking. If unset or non-production, no GA scripts or events run.
+- Verify: GA Realtime after deploy, or DevTools → Network → filter `g/collect`.
