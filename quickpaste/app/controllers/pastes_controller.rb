@@ -50,13 +50,13 @@ class PastesController < ApplicationController
       return
     end
 
-    if @paste.read_once && !read_once_bypassed? && !read_once_confirmed?
+    if @paste.read_once && !read_once_confirmed?
       render :read_once, status: :ok
       return
     end
 
     @paste.increment!(:view_count)
-    @destroy_read_once_after_show = @paste.read_once && !read_once_bypassed?
+    @destroy_read_once_after_show = @paste.read_once
   end
 
   # GET /pastes/new
@@ -181,10 +181,6 @@ class PastesController < ApplicationController
 
   def read_once_confirmed?
     params[:read_once_confirm].to_s == "1"
-  end
-
-  def read_once_bypassed?
-    logged_in? && @paste.owner_id == current_user.id
   end
 
   def allow_owner_bypass!
