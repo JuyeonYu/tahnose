@@ -11,6 +11,7 @@ Engineering guidance
 - Use ActiveRecord validations and i18n for user‑facing strings.
 - Use Rails.cache and session for lightweight rate limits/cooldowns unless multi‑instance scale requires more.
 - Prefer built‑in view helpers and Turbo/Stimulus patterns over custom JS where possible.
+- Lesson: if Turbo Frames/Streams can solve a UI refresh, use them instead of adding JS files.
 - Write tests for behavior that could regress or impact users (auth, read‑once, rate limits).
 
 Style
