@@ -3,7 +3,7 @@
     <% item_classes = ["paste-list-item"] %>
     <% item_classes << "paste-list-item--masked" if paste.locked? || paste.read_once %>
     <div class="<%= item_classes.join(" ") %>">
-      <%= link_to paste, class: "paste-list-link" do %>
+      <%= link_to paste, class: "paste-list-link", data: { turbo_frame: "_top" } do %>
         <div class="paste-tags">
           <% if paste.locked? %>
             <span class="paste-lock">
