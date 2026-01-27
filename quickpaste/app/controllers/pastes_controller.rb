@@ -1,8 +1,7 @@
 class PastesController < ApplicationController
   helper_method :unlocked?
-  PASTE_CREATE_IP_LIMIT = 8
+  PASTE_CREATE_IP_LIMIT = 15
   PASTE_CREATE_IP_PERIOD_SECONDS = 60
-  PASTE_CREATE_COOLDOWN_SECONDS = 20
   SEARCH_IP_LIMIT = 15
   SEARCH_IP_PERIOD_SECONDS = 60
   SEARCH_MIN_QUERY_LENGTH = 2
@@ -73,14 +72,6 @@ class PastesController < ApplicationController
       scope: "pastes_create",
       limit: PASTE_CREATE_IP_LIMIT,
       period_seconds: PASTE_CREATE_IP_PERIOD_SECONDS,
-      view: :new
-    )
-      return
-    end
-
-    unless session_cooldown!(
-      key: "pastes:create:last",
-      seconds: PASTE_CREATE_COOLDOWN_SECONDS,
       view: :new
     )
       return
