@@ -11,10 +11,11 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="paste-body" data-controller="byte-counter" data-byte-counter-max-value="<%= Paste::MAX_QR_BYTES %>">
     <%= f.label :body, t("pastes.form.body_label") %>
     <span class="required-marker">*</span><br>
-    <%= f.text_area :body, rows: 10, required: true, placeholder: t("pastes.form.body_placeholder") %>
+    <%= f.text_area :body, rows: 10, required: true, placeholder: t("pastes.form.body_placeholder"), data: { "byte-counter-target": "input", action: "input->byte-counter#update" } %>
+    <div class="byte-counter" data-byte-counter-target="output" data-byte-counter-unit="<%= t("pastes.form.byte_unit") %>"></div>
   </div>
 
   <% if paste.new_record? %>
@@ -30,17 +31,31 @@
     </div>
   <% end %>
 
-  <div>
-    <%= f.label :password, t("pastes.form.password_label") %><br>
-    <%= f.password_field :password, placeholder: t("pastes.form.password_placeholder") %>
+  <div class="paste-options" data-controller="read-once">
+    <div class="paste-option">
+      <%= f.check_box :read_once, data: { "read-once-target": "readOnce", action: "read-once#toggleReadOnce" } %>
+      <%= f.label :read_once, t("pastes.form.read_once_label") %>
+    </div>
 
-    <%= f.label :password_confirmation, t("pastes.form.password_confirmation_label") %>
-    <%= f.password_field :password_confirmation, placeholder: t("pastes.form.password_confirmation_placeholder") %>
-  </div>
+    <p class="paste-options-warning" data-read-once-target="warning" hidden>
+      <%= t("pastes.form.read_once_warning") %>
+    </p>
 
-  <div>
-    <%= f.check_box :read_once %>
-    <%= f.label :read_once, t("pastes.form.read_once_label") %>
+    <div class="paste-option">
+      <%= check_box_tag :password_enabled, "1", paste.password_digest.present?, data: { "read-once-target": "passwordToggle", action: "read-once#togglePassword" } %>
+      <%= label_tag :password_enabled do %>
+        <%= t("pastes.form.password_option_label") %>
+        <span class="paste-option-recommended" data-read-once-target="recommended" hidden><%= t("pastes.form.recommended") %></span>
+      <% end %>
+    </div>
+
+    <div class="paste-password-fields" data-read-once-target="passwordFields">
+      <%= f.label :password, t("pastes.form.password_label") %><br>
+      <%= f.password_field :password, placeholder: t("pastes.form.password_placeholder"), data: { "read-once-target": "passwordInput" } %>
+
+      <%= f.label :password_confirmation, t("pastes.form.password_confirmation_label") %>
+      <%= f.password_field :password_confirmation, placeholder: t("pastes.form.password_confirmation_placeholder"), data: { "read-once-target": "passwordConfirmInput" } %>
+    </div>
   </div>
 
   <div>
