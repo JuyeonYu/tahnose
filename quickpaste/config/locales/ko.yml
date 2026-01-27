@@ -18,6 +18,8 @@ ko:
       copy: "복사"
   time:
     seconds_short: "초"
+    formats:
+      default: "%Y-%m-%d %H:%M"
   errors:
     rate_limited: "잠시 후 다시 시도해주세요."
     unauthorized: "권한이 없습니다."

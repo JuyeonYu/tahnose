@@ -18,6 +18,8 @@ en:
       copy: "Copy"
   time:
     seconds_short: "s"
+    formats:
+      default: "%Y-%m-%d %H:%M"
   errors:
     rate_limited: "Please try again shortly."
     unauthorized: "Unauthorized"

@@ -5,7 +5,7 @@
   <% if @paste.read_once %>
     <span class="paste-read-once">⏱️</span>
   <% end %>
-  <%= @paste.tag %> · <%= @paste.created_at %>
+  <%= @paste.tag %> · <%= l(@paste.created_at.in_time_zone) %>
 </h1>
 
 <hr>
