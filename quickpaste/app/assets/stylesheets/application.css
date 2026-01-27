@@ -404,6 +404,13 @@ turbo-frame#flash,
   color: var(--text);
 }
 
+.flash-manage-link {
+  border: 1px solid #ffd2a6;
+  background: #fff4e6;
+  color: #6b3a00;
+  font-weight: 600;
+}
+
 .pagination {
   display: flex;
   flex-wrap: wrap;
