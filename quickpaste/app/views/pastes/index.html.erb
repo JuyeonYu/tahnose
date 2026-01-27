@@ -2,10 +2,12 @@
 <p><%= link_to t("pastes.index.new_link"), new_paste_path %></p>
 
 <%= form_with url: pastes_path, method: :get, local: true do |form| %>
-  <div>
-    <%= form.label :q, t("pastes.index.search_label") %>
-    <%= form.search_field :q, value: @query, placeholder: t("pastes.index.search_placeholder") %>
-    <%= form.submit t("common.actions.search") %>
+  <div class="pastes-search">
+    <%= form.label :q, t("pastes.index.search_label"), class: "pastes-search-label" %>
+    <div class="pastes-search-row">
+      <%= form.search_field :q, value: @query, placeholder: t("pastes.index.search_placeholder"), class: "pastes-search-field" %>
+      <%= form.submit t("common.actions.search"), class: "pastes-search-button" %>
+    </div>
   </div>
 <% end %>
 

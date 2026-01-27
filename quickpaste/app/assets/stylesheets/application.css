@@ -114,6 +114,33 @@ form {
   margin-bottom: var(--space-4);
 }
 
+.pastes-search {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.pastes-search-label {
+  display: block;
+}
+
+.pastes-search-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.pastes-search-field {
+  width: 100%;
+  min-width: 0;
+}
+
+.pastes-search-button {
+  padding: 4px 10px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
 label {
   font-weight: 500;
   color: var(--text);
