@@ -51,7 +51,7 @@ ko:
       resend_link: "로그인 링크 재전송"
   pastes:
     index:
-      title: "최신 붙여넣기"
+      title: "Notes"
       search_label: "검색"
       search_placeholder: "태그를 검색해보세요."
       new_link: "새로 만들기"
