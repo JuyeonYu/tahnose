@@ -6,6 +6,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="<%= t("app.name") %>">
     <meta name="mobile-web-app-capable" content="yes">
+
+    <meta property="og:title" content="QuickPaste" />
+    <meta property="og:description" content="문자열을 빠르게 공유하는 가장 간단한 방법" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= image_url("og.png") %>" />
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -33,7 +40,7 @@
         <% if logged_in? %>
           <span class="current-user"><%= current_user.email %></span>
           <%= link_to t("nav.my_pastes"), mine_pastes_path, class: "my-pastes-link" %>
-          <%= button_to t("common.actions.logout"), logout_path, method: :delete %>
+          <%= button_to t("common.actions.logout"), logout_path, method: :delete, form: { class: "logout-form" }, class: "logout-button" %>
         <% else %>
           <%= link_to t("common.actions.login"), login_path, class: "login-button" %>
         <% end %>

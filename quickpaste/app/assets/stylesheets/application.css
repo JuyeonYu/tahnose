@@ -108,6 +108,11 @@ pre {
   color: var(--muted);
 }
 
+.logout-form {
+  display: inline-flex;
+  margin: 0;
+}
+
 form {
   display: grid;
   gap: var(--space-3);
