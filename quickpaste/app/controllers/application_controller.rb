@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   # == Session-based Authentication (skeleton)
   helper_method :current_user, :logged_in?
 
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
   private
 
   def current_user
@@ -50,5 +52,9 @@ class ApplicationController < ActionController::Base
 
   def pop_return_to
     session.delete(:return_to)
+  end
+
+  def render_not_found
+    render "errors/not_found", status: :not_found
   end
 end

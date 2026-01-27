@@ -21,6 +21,10 @@ en:
   errors:
     rate_limited: "Please try again shortly."
     unauthorized: "Unauthorized"
+    not_found:
+      title: "Page not found"
+      message: "The paste does not exist or has been deleted."
+      back_to_list: "Back to list"
     template:
       header: "%{count} errors prohibited this record from being saved"
     messages:
