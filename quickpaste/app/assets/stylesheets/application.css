@@ -146,6 +146,116 @@ form {
   white-space: nowrap;
 }
 
+.pastes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.pastes-new-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #f6f7fb;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.pastes-new-link:hover {
+  background: #edf1f8;
+  border-color: #cfd6e3;
+}
+
+.paste-list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.paste-list-item {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.paste-list-item--masked {
+  color: var(--muted);
+}
+
+.paste-list-item--masked .paste-preview {
+  color: var(--muted);
+}
+
+.paste-list-item--masked .paste-tag-chip {
+  color: var(--muted);
+  background: #f9fafc;
+}
+
+.paste-list-item:last-child {
+  border-bottom: 0;
+}
+
+.paste-list-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
+.paste-preview {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.paste-preview--masked {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.paste-tags {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.paste-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #f6f7fb;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.paste-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.paste-meta-right {
+  white-space: nowrap;
+}
+
 label {
   font-weight: 500;
   color: var(--text);
