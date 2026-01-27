@@ -1,0 +1,16 @@
+<h1>
+  <span class="paste-read-once">⏱️</span>
+  <%= @paste.tag %> · <%= @paste.created_at %>
+</h1>
+
+<hr>
+
+<div class="read-once-warning">
+  <%= t("pastes.show.read_once_warning") %>
+</div>
+
+<%= link_to t("pastes.show.confirm_read_once"), paste_path(@paste, read_once_confirm: 1), class: "login-button" %>
+
+<p>
+  <%= link_to t("pastes.show.list"), pastes_path %>
+</p>

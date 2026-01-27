@@ -51,8 +51,7 @@ class PastesController < ApplicationController
     end
 
     if @paste.read_once && !read_once_bypassed? && !read_once_confirmed?
-      @read_once_pending = true
-      render :show, status: :ok
+      render :read_once, status: :ok
       return
     end
 

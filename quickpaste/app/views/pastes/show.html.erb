@@ -10,25 +10,18 @@
 
 <hr>
 
-<% if @read_once_pending %>
-  <div class="read-once-warning">
-    <%= t("pastes.show.read_once_warning") %>
+<div
+  data-controller="clipboard"
+  data-clipboard-copy-label-value="<%= t("pastes.show.copy") %>"
+  data-clipboard-copied-label-value="<%= t("pastes.show.copied") %>"
+>
+  <div class="paste-actions">
+    <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
+      <%= t("pastes.show.copy") %>
+    </button>
   </div>
-  <%= link_to t("pastes.show.confirm_read_once"), paste_path(@paste, read_once_confirm: 1), class: "login-button" %>
-<% else %>
-  <div
-    data-controller="clipboard"
-    data-clipboard-copy-label-value="<%= t("pastes.show.copy") %>"
-    data-clipboard-copied-label-value="<%= t("pastes.show.copied") %>"
-  >
-    <div class="paste-actions">
-      <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
-        <%= t("pastes.show.copy") %>
-      </button>
-    </div>
-    <pre data-clipboard-target="content"><%= @paste.body %></pre>
-  </div>
-<% end %>
+  <pre data-clipboard-target="content"><%= @paste.body %></pre>
+</div>
 
 <hr>
 
