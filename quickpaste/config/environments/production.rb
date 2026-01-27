@@ -23,6 +23,8 @@ Rails.application.configure do
 
   # Store uploaded files on Cloudflare R2 via ActiveStorage S3-compatible service.
   config.active_storage.service = :r2
+  config.active_storage.content_types_to_serve_as_binary = []
+  config.active_storage.content_types_allowed_inline = %w[image/png image/jpeg image/jpg image/gif]
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # config.assume_ssl = true
