@@ -2,5 +2,9 @@
   <% next if message.blank? %>
   <% flash_class = ["flash", "flash-#{type}"] %>
   <% flash_class << "flash-manage-link" if type.to_s == "manage_url" %>
-  <div class="<%= flash_class.join(" ") %>"><%= message %></div>
+  <% if type.to_s == "manage_url" %>
+    <div class="<%= flash_class.join(" ") %>"><%= safe_join(message.to_s.split("\n"), tag.br) %></div>
+  <% else %>
+    <div class="<%= flash_class.join(" ") %>"><%= message %></div>
+  <% end %>
 <% end %>
