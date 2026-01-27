@@ -2,24 +2,25 @@
   class="session"
   data-controller="magic-link-resend"
   data-magic-link-resend-seconds-value="<%= @resend_cooldown_seconds %>"
+  data-magic-link-resend-suffix-value="<%= t(\"time.seconds_short\") %>"
 >
-  <h1>로그인</h1>
+  <h1><%= t("sessions.new.title") %></h1>
 
   <%= form_with url: magic_link_path, method: :post, local: true do |form| %>
     <div class="field">
-      <%= form.label :email, "이메일" %>
+      <%= form.label :email, t("sessions.new.email_label") %>
       <%= form.email_field :email, value: @prefilled_email, required: true, autocomplete: "email" %>
     </div>
 
     <div class="actions">
-      <%= form.submit "로그인 링크 받기", data: { "magic-link-resend-target": "requestButton" } %>
+      <%= form.submit t("sessions.new.request_link"), data: { "magic-link-resend-target": "requestButton" } %>
     </div>
   <% end %>
 
   <div class="actions">
     <%= form_with url: magic_link_resend_path, method: :post, local: true do |form| %>
       <%= form.hidden_field :email, value: @prefilled_email %>
-      <%= form.submit "로그인 링크 재전송",
+      <%= form.submit t("sessions.new.resend_link"),
         disabled: @prefilled_email.blank? || @resend_cooldown_seconds.to_i.positive?,
         data: { "magic-link-resend-target": "resendButton" } %>
       <span data-magic-link-resend-target="timer"></span>

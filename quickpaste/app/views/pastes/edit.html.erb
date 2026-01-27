@@ -1,8 +1,8 @@
-<h1>수정</h1>
+<h1><%= t("pastes.edit.title") %></h1>
 
 <%= render "form", paste: @paste %>
 
 <p>
-  <%= link_to "취소", paste_path(@paste) %> |
-  <%= link_to "목록", pastes_path %>
+  <%= link_to t("common.actions.cancel"), paste_path(@paste) %> |
+  <%= link_to t("common.actions.list"), pastes_path %>
 </p>

@@ -1,7 +1,8 @@
 module RateLimitable
   private
 
-  def ip_rate_limit!(scope:, limit:, period_seconds:, message: "잠시 후 다시 시도해주세요.", view: nil)
+  def ip_rate_limit!(scope:, limit:, period_seconds:, message: nil, view: nil)
+    message ||= I18n.t("errors.rate_limited")
     key = "rl:#{scope}:ip:#{request.remote_ip}"
     count = cache_increment(key, period_seconds)
     started_at = cache_started_at(key, period_seconds)
@@ -13,7 +14,8 @@ module RateLimitable
     false
   end
 
-  def session_cooldown!(key:, seconds:, message: "잠시 후 다시 시도해주세요.", view: nil)
+  def session_cooldown!(key:, seconds:, message: nil, view: nil)
+    message ||= I18n.t("errors.rate_limited")
     last_at = session[key].to_i
     if last_at.positive?
       elapsed = Time.current.to_i - last_at

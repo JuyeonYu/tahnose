@@ -1,13 +1,13 @@
-<h1>🔒 비밀글입니다</h1>
+<h1>🔒 <%= t("pastes.locked.title") %></h1>
 
 <%= form_with url: unlock_paste_path(@paste), method: :post, local: true do |f| %>
   <div>
-    <%= label_tag :password, "비밀번호" %>
+    <%= label_tag :password, t("pastes.locked.password_label") %>
     <%= password_field_tag :password %>
   </div>
 
   <div>
-    <%= submit_tag "확인" %>
+    <%= submit_tag t("common.actions.confirm") %>
   </div>
 <% end %>
 

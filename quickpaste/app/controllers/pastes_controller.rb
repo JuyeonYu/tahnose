@@ -18,7 +18,7 @@ class PastesController < ApplicationController
 
     if @query.present?
       if @query.length < SEARCH_MIN_QUERY_LENGTH
-        flash.now[:alert] = "검색어는 #{SEARCH_MIN_QUERY_LENGTH}자 이상 입력해주세요."
+        flash.now[:alert] = t("flash.pastes.search_too_short", count: SEARCH_MIN_QUERY_LENGTH)
         @pagy, @pastes = pagy(Paste.none)
         render :index, status: :unprocessable_entity
         return
@@ -95,10 +95,10 @@ class PastesController < ApplicationController
 
         # 관리 링크는 query로 전달 (예: /pastes/123/manage?token=...)
         @manage_url = manage_paste_url(@paste, token: token)
-        flash[:manage_url] = "[주의]아래 링크로만 수정, 삭제가 가능합니다."
+        flash[:manage_url] = t("flash.pastes.manage_link", url: @manage_url)
       end
 
-      redirect_to @paste, notice: @manage_url, status: :see_other
+      redirect_to @paste, notice: t("flash.pastes.created"), status: :see_other
 
     else
       render :new, status: :unprocessable_entity
@@ -112,7 +112,7 @@ class PastesController < ApplicationController
   # PATCH /pastes/:id
   def update
     if @paste.update(paste_update_params)
-      redirect_to @paste, notice: "게시글이 수정되었습니다."
+      redirect_to @paste, notice: t("flash.pastes.updated")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -121,7 +121,7 @@ class PastesController < ApplicationController
   # DELETE /pastes/:id
   def destroy
     @paste.destroy
-    redirect_to pastes_path, notice: "게시글이 삭제되었습니다."
+    redirect_to pastes_path, notice: t("flash.pastes.deleted")
   end
 
   def unlock
@@ -131,7 +131,7 @@ class PastesController < ApplicationController
       session[unlock_session_key(@paste)] = true
       redirect_to @paste
     else
-      flash.now[:alert] = "비밀번호가 올바르지 않습니다."
+      flash.now[:alert] = t("flash.pastes.invalid_password")
       render :locked, status: :unauthorized
     end
   end
@@ -195,7 +195,7 @@ class PastesController < ApplicationController
   def require_manage_token!
     token = params[:token].presence || session_manage_token_for(@paste)
     unless @paste.valid_manage_token?(token)
-      render plain: "Unauthorized", status: :unauthorized
+      render plain: t("errors.unauthorized"), status: :unauthorized
       return
     end
     # 한 번 성공하면 세션에 저장해두면 UX가 좋아짐(매번 token 붙일 필요 없음)

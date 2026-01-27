@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     @prefilled_email = email
     prepare_magic_link_form
     if email.blank?
-      flash.now[:alert] = "이메일을 입력해주세요."
+      flash.now[:alert] = t("flash.sessions.email_required")
       render :new, status: :unprocessable_entity
       return
     end
@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
     @prefilled_email = email
     prepare_magic_link_form
     if email.blank?
-      flash.now[:alert] = "이메일을 입력해주세요."
+      flash.now[:alert] = t("flash.sessions.email_required")
       render :new, status: :unprocessable_entity
       return
     end
@@ -92,19 +92,19 @@ class SessionsController < ApplicationController
   def magic
     token = LoginToken.find_active_by_raw_token(params[:token])
     if token.nil?
-      redirect_to login_path, alert: "로그인 링크가 유효하지 않거나 만료되었습니다."
+      redirect_to login_path, alert: t("flash.sessions.invalid_magic_link")
       return
     end
 
     token.use!
     session[:user_id] = token.user_id
 
-    redirect_to pop_return_to || pastes_path, notice: "로그인되었습니다."
+    redirect_to pop_return_to || pastes_path, notice: t("flash.sessions.logged_in")
   end
 
   def destroy
     reset_session
-    redirect_to login_path, notice: "로그아웃되었습니다."
+    redirect_to login_path, notice: t("flash.sessions.logged_out")
   end
 
   private
@@ -149,7 +149,7 @@ class SessionsController < ApplicationController
   end
 
   def magic_link_notice(seconds)
-    "메일을 보냈습니다. 스팸함을 확인해주세요. #{seconds}초 후 재요청 가능합니다."
+    t("flash.sessions.magic_link_sent", seconds: seconds)
   end
 
   def deliver_magic_link!(user, raw_token)

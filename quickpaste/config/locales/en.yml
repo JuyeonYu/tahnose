@@ -1,31 +1,113 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  app:
+    name: "Quickpaste"
+  common:
+    actions:
+      create: "Create"
+      save: "Save"
+      new: "New"
+      cancel: "Cancel"
+      list: "List"
+      edit: "Edit"
+      delete: "Delete"
+      confirm: "Confirm"
+      search: "Search"
+      login: "Log in"
+      logout: "Log out"
+      resend: "Resend"
+      copy: "Copy"
+  time:
+    seconds_short: "s"
+  errors:
+    rate_limited: "Please try again shortly."
+    unauthorized: "Unauthorized"
+    template:
+      header: "%{count} errors prohibited this record from being saved"
+    messages:
+      must_be_in_future: "must be in the future"
+      too_long_bytes: "must be %{count} bytes or fewer (current: %{current} bytes)"
+  nav:
+    my_pastes: "My pastes"
+  flash:
+    sessions:
+      login_required: "Please log in to continue. Request a login link by email."
+      email_required: "Please enter your email."
+      magic_link_sent: "We emailed your login link. Please check your spam folder. You can request again after %{seconds} seconds."
+      invalid_magic_link: "Your login link is invalid or expired."
+      logged_in: "Logged in."
+      logged_out: "Logged out."
+    pastes:
+      search_too_short: "Please enter at least %{count} characters."
+      manage_link: "[Warning] Use only this link to edit or delete: %{url}"
+      created: "Paste created."
+      updated: "Paste updated."
+      deleted: "Paste deleted."
+      invalid_password: "Password is incorrect."
+  sessions:
+    new:
+      title: "Log in"
+      email_label: "Email"
+      request_link: "Send login link"
+      resend_link: "Resend login link"
+  pastes:
+    index:
+      title: "Pastes"
+      search_label: "Search"
+      search_placeholder: "Tag or body"
+      new_link: "New paste"
+      prev: "Previous"
+      next: "Next"
+    new:
+      title: "New paste"
+    edit:
+      title: "Edit"
+    mine:
+      title: "My pastes"
+      back_to_list: "Back to list"
+    form:
+      body_label: "Body"
+      body_placeholder: "Content"
+      tag_label: "Tag"
+      tag_placeholder: "Search tag (e.g., device-token, test-link)"
+      password_label: "Password"
+      password_placeholder: "Only if you want to lock this paste"
+      password_confirmation_label: "Password confirmation"
+      password_confirmation_placeholder: "Re-enter password"
+      read_once_label: "Delete after read"
+      errors_header: "%{count} errors"
+    show:
+      read_once_warning: "This paste can be read once. It will be deleted after confirmation."
+      confirm_read_once: "Confirm and read"
+      copy: "Copy"
+      copied: "Copied"
+      qr_loading: "Generating QR..."
+      edit: "Edit"
+      delete: "Delete"
+      delete_confirm: "Delete for sure?"
+      list: "List"
+      qr_alt: "QR code"
+    locked:
+      title: "This paste is locked"
+      password_label: "Password"
+      submit: "Confirm"
+  mailers:
+    magic_link:
+      subject: "Login link"
+      heading: "Login link"
+      intro_html: "Click the button below to log in."
+      intro_text: "Click the link below to log in."
+      action: "Log in"
+      expiry: "This link is valid for %{minutes} minutes."
+  activerecord:
+    models:
+      paste: "Paste"
+      user: "User"
+    attributes:
+      paste:
+        body: "Body"
+        tag: "Tag"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        read_once: "Delete after read"
+      user:
+        email: "Email"

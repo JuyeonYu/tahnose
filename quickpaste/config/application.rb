@@ -23,5 +23,8 @@ module Quickpaste
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.i18n.available_locales = %i[ko en]
+    config.i18n.default_locale = :ko
+    # TODO: Add Accept-Language based locale detection when needed.
   end
 end

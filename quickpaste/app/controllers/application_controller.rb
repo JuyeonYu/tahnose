@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     return if logged_in?
 
     store_return_to
-    redirect_to login_path, alert: "로그인이 필요합니다. 이메일로 로그인 링크를 받아주세요."
+    redirect_to login_path, alert: t("flash.sessions.login_required")
   end
 
   # Store return location so we can redirect back after magic-link login

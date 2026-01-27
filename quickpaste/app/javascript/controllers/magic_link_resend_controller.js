@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["resendButton", "timer"]
-  static values = { seconds: Number }
+  static values = { seconds: Number, suffix: String }
 
   connect() {
     if (this.secondsValue > 0) {
@@ -37,7 +37,8 @@ export default class extends Controller {
     }
     if (this.hasTimerTarget) {
       if (this.remainingSeconds > 0) {
-        this.timerTarget.textContent = ` ${this.remainingSeconds}s`
+        const suffix = this.hasSuffixValue ? this.suffixValue : "s"
+        this.timerTarget.textContent = ` ${this.remainingSeconds}${suffix}`
       } else {
         this.timerTarget.textContent = ""
       }

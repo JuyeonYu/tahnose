@@ -119,6 +119,12 @@ label {
   color: var(--text);
 }
 
+.required-marker {
+  color: #e04646;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
 input,
 textarea,
 select {

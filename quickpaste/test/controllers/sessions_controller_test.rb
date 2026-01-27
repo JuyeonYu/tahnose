@@ -17,7 +17,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
       post magic_link_path, params: { email: email }
     end
     assert_response :too_many_requests
-    assert_match "60초", response.body
+    assert_match I18n.t("flash.sessions.magic_link_sent", seconds: SessionsController::MAGIC_LINK_EMAIL_COOLDOWN_SECONDS), response.body
   end
 
   test "magic link requests enforce ip rate limit" do

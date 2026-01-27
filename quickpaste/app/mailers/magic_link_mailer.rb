@@ -3,6 +3,6 @@ class MagicLinkMailer < ApplicationMailer
     @user = params[:user]
     @magic_link = params[:magic_link]
 
-    mail(to: @user.email, subject: "로그인 링크")
+    mail(to: @user.email, subject: I18n.t("mailers.magic_link.subject"))
   end
 end

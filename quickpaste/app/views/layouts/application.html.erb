@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Quickpaste" %></title>
+    <title><%= content_for(:title) || t("app.name") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Quickpaste">
+    <meta name="application-name" content="<%= t("app.name") %>">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -32,10 +32,10 @@
       <div class="container site-actions">
         <% if logged_in? %>
           <span class="current-user"><%= current_user.email %></span>
-          <%= link_to "내 글", mine_pastes_path, class: "my-pastes-link" %>
-          <%= button_to "로그아웃", logout_path, method: :delete %>
+          <%= link_to t("nav.my_pastes"), mine_pastes_path, class: "my-pastes-link" %>
+          <%= button_to t("common.actions.logout"), logout_path, method: :delete %>
         <% else %>
-          <%= link_to "로그인", login_path, class: "login-button" %>
+          <%= link_to t("common.actions.login"), login_path, class: "login-button" %>
         <% end %>
       </div>
     </header>

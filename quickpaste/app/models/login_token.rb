@@ -69,6 +69,6 @@ class LoginToken < ApplicationRecord
 
   def expires_at_in_future
     return if expires_at.blank?
-    errors.add(:expires_at, "must be in the future") if expires_at <= Time.current
+    errors.add(:expires_at, :must_be_in_future) if expires_at <= Time.current
   end
 end

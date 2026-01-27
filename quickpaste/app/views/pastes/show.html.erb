@@ -12,14 +12,18 @@
 
 <% if @read_once_pending %>
   <div class="read-once-warning">
-    이 글은 한번만 읽을 수 있습니다. 확인을 누르면 바로 삭제됩니다.
+    <%= t("pastes.show.read_once_warning") %>
   </div>
-  <%= link_to "확인하고 읽기", paste_path(@paste, read_once_confirm: 1), class: "login-button" %>
+  <%= link_to t("pastes.show.confirm_read_once"), paste_path(@paste, read_once_confirm: 1), class: "login-button" %>
 <% else %>
-  <div data-controller="clipboard">
+  <div
+    data-controller="clipboard"
+    data-clipboard-copy-label-value="<%= t("pastes.show.copy") %>"
+    data-clipboard-copied-label-value="<%= t("pastes.show.copied") %>"
+  >
     <div class="paste-actions">
       <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
-        copy
+        <%= t("pastes.show.copy") %>
       </button>
     </div>
     <pre data-clipboard-target="content"><%= @paste.body %></pre>
@@ -30,19 +34,19 @@
 
 <% if @paste.qr_image.attached? %>
   <div class="qr">
-    <%= image_tag url_for(@paste.qr_image), alt: "QR Code" %>
+    <%= image_tag url_for(@paste.qr_image), alt: t("pastes.show.qr_alt") %>
   </div>
 <% else %>
   <div class="qr qr--empty">
-    QR 생성 중...
+    <%= t("pastes.show.qr_loading") %>
   </div>
 <% end %>
 
 <p>
   <% if @manage_mode || (logged_in? && @paste.owner == current_user) %>
-    <%= link_to "수정", edit_paste_path(@paste) %> |
-    <%= link_to "삭제", paste_path(@paste), data: { turbo_method: :delete, turbo_confirm: "진짜 삭제?" } %> |
+    <%= link_to t("pastes.show.edit"), edit_paste_path(@paste) %> |
+    <%= link_to t("pastes.show.delete"), paste_path(@paste), data: { turbo_method: :delete, turbo_confirm: t("pastes.show.delete_confirm") } %> |
   <% end %>
 
-  <%= link_to "목록", pastes_path %>
+  <%= link_to t("pastes.show.list"), pastes_path %>
 </p>

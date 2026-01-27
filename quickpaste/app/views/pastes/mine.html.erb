@@ -1,5 +1,5 @@
-<h1>내가 쓴 글</h1>
-<p><%= link_to "목록으로", pastes_path %></p>
+<h1><%= t("pastes.mine.title") %></h1>
+<p><%= link_to t("pastes.mine.back_to_list"), pastes_path %></p>
 
 <% @pastes.each do |paste| %>
   <div>

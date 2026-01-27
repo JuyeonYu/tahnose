@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["content", "button"]
+  static values = { copyLabel: String, copiedLabel: String }
 
   copy() {
     const text = this.contentTarget.textContent
@@ -25,10 +26,12 @@ export default class extends Controller {
 
   indicate() {
     const original = this.buttonTarget.textContent
-    this.buttonTarget.textContent = "copied"
+    const copiedLabel = this.hasCopiedLabelValue ? this.copiedLabelValue : "copied"
+    this.buttonTarget.textContent = copiedLabel
     clearTimeout(this.resetTimer)
     this.resetTimer = setTimeout(() => {
-      this.buttonTarget.textContent = original
+      const copyLabel = this.hasCopyLabelValue ? this.copyLabelValue : original
+      this.buttonTarget.textContent = copyLabel
     }, 1200)
   }
 }

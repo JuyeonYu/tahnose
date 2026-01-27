@@ -1,0 +1,113 @@
+ko:
+  app:
+    name: "Quickpaste"
+  common:
+    actions:
+      create: "생성하기"
+      save: "저장하기"
+      new: "새로 만들기"
+      cancel: "취소"
+      list: "목록"
+      edit: "수정"
+      delete: "삭제"
+      confirm: "확인"
+      search: "검색"
+      login: "로그인"
+      logout: "로그아웃"
+      resend: "재전송"
+      copy: "복사"
+  time:
+    seconds_short: "초"
+  errors:
+    rate_limited: "잠시 후 다시 시도해주세요."
+    unauthorized: "권한이 없습니다."
+    template:
+      header: "%{count}개의 오류가 있습니다"
+    messages:
+      must_be_in_future: "은(는) 미래여야 합니다"
+      too_long_bytes: "은(는) %{count} bytes 이하여야 합니다. (현재: %{current} bytes)"
+  nav:
+    my_pastes: "내 글"
+  flash:
+    sessions:
+      login_required: "로그인이 필요합니다. 이메일로 로그인 링크를 받아주세요."
+      email_required: "이메일을 입력해주세요."
+      magic_link_sent: "로그인 링크를 이메일로 보냈습니다. 스팸함을 확인해주세요. %{seconds}초 후 재요청 가능합니다."
+      invalid_magic_link: "로그인 링크가 유효하지 않거나 만료되었습니다."
+      logged_in: "로그인되었습니다."
+      logged_out: "로그아웃되었습니다."
+    pastes:
+      search_too_short: "검색어는 %{count}자 이상 입력해주세요."
+      manage_link: "[주의]아래 링크로만 수정, 삭제가 가능합니다: %{url}"
+      created: "게시글이 생성되었습니다."
+      updated: "게시글이 수정되었습니다."
+      deleted: "게시글이 삭제되었습니다."
+      invalid_password: "비밀번호가 올바르지 않습니다."
+  sessions:
+    new:
+      title: "로그인"
+      email_label: "이메일"
+      request_link: "로그인 링크 받기"
+      resend_link: "로그인 링크 재전송"
+  pastes:
+    index:
+      title: "게시글"
+      search_label: "검색"
+      search_placeholder: "태그 또는 본문"
+      new_link: "새로 만들기"
+      prev: "이전"
+      next: "다음"
+    new:
+      title: "새 글"
+    edit:
+      title: "수정"
+    mine:
+      title: "내가 쓴 글"
+      back_to_list: "목록으로"
+    form:
+      body_label: "본문"
+      body_placeholder: "내용 입력"
+      tag_label: "태그"
+      tag_placeholder: "검색용 태그 (예: 디바이스토큰, 테스트링크)"
+      password_label: "비밀번호"
+      password_placeholder: "비밀글로 만들 때만 입력"
+      password_confirmation_label: "비밀번호 확인"
+      password_confirmation_placeholder: "비밀번호 재입력"
+      read_once_label: "읽으면 바로 삭제"
+      errors_header: "%{count}개의 오류가 있습니다"
+    show:
+      read_once_warning: "이 글은 한 번만 읽을 수 있습니다. 확인을 누르면 바로 삭제됩니다."
+      confirm_read_once: "확인하고 읽기"
+      copy: "복사"
+      copied: "복사됨"
+      qr_loading: "QR 생성 중..."
+      edit: "수정"
+      delete: "삭제"
+      delete_confirm: "진짜 삭제?"
+      list: "목록"
+      qr_alt: "QR 코드"
+    locked:
+      title: "비밀글입니다"
+      password_label: "비밀번호"
+      submit: "확인"
+  mailers:
+    magic_link:
+      subject: "로그인 링크"
+      heading: "로그인 링크"
+      intro_html: "아래 버튼을 눌러 로그인하세요."
+      intro_text: "아래 링크를 눌러 로그인하세요."
+      action: "로그인하기"
+      expiry: "이 링크는 %{minutes}분 동안 유효합니다."
+  activerecord:
+    models:
+      paste: "게시글"
+      user: "사용자"
+    attributes:
+      paste:
+        body: "본문"
+        tag: "태그"
+        password: "비밀번호"
+        password_confirmation: "비밀번호 확인"
+        read_once: "읽으면 바로 삭제"
+      user:
+        email: "이메일"

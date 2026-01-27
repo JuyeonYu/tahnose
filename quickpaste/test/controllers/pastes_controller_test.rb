@@ -36,7 +36,7 @@ class PastesControllerTest < ActionDispatch::IntegrationTest
   test "search rejects short queries" do
     get pastes_path, params: { q: "a" }
     assert_response :unprocessable_entity
-    assert_match "검색어는", response.body
+    assert_match I18n.t("flash.pastes.search_too_short", count: PastesController::SEARCH_MIN_QUERY_LENGTH), response.body
   end
 
   test "search enforces ip rate limit" do

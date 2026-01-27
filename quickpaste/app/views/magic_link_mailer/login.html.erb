@@ -1,4 +1,4 @@
-<h1>로그인 링크</h1>
-<p>아래 버튼을 눌러 로그인하세요.</p>
-<p><a href="<%= @magic_link %>">로그인하기</a></p>
-<p>이 링크는 15분 동안 유효합니다.</p>
+<h1><%= t("mailers.magic_link.heading") %></h1>
+<p><%= t("mailers.magic_link.intro_html") %></p>
+<p><a href="<%= @magic_link %>"><%= t("mailers.magic_link.action") %></a></p>
+<p><%= t("mailers.magic_link.expiry", minutes: 15) %></p>

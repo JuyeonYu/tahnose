@@ -86,7 +86,7 @@ class Paste < ApplicationRecord
     return if body.blank?
 
     if body.bytesize > MAX_QR_BYTES
-      errors.add(:body, "은(는) #{MAX_QR_BYTES} bytes 이하여야 합니다. (현재: #{body.bytesize} bytes)")
+      errors.add(:body, :too_long_bytes, count: MAX_QR_BYTES, current: body.bytesize)
     end
   end
 
