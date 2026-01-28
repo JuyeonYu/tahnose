@@ -195,6 +195,8 @@ class PastesController < ApplicationController
   end
 
   def require_manage_token!
+    return if logged_in? && @paste.owner == current_user
+
     token = params[:token].presence || session_manage_token_for(@paste)
     unless @paste.valid_manage_token?(token)
       render plain: t("errors.unauthorized"), status: :unauthorized
