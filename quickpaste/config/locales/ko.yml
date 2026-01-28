@@ -59,6 +59,7 @@ ko:
   pastes:
     index:
       title: "Notes"
+      subtitle: "최근 작성된 노트를 한눈에 보고, 태그로 빠르게 찾아보세요."
       search_label: "검색"
       search_placeholder: "태그를 검색해보세요."
       new_link: "새로 만들기"

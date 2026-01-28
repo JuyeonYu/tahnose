@@ -1,6 +1,9 @@
 <div>
   <div class="pastes-header">
-    <h1><%= t("pastes.index.title") %></h1>
+    <div class="pastes-header-text">
+      <h1><%= t("pastes.index.title") %></h1>
+      <p class="pastes-header-subtitle"><%= t("pastes.index.subtitle") %></p>
+    </div>
     <div class="pastes-header-actions">
       <%= link_to t("pastes.index.reload"), url_for(q: @query.presence), class: "pastes-reload-button", data: { turbo_frame: "pastes_list" } %>
       <%= link_to t("pastes.index.new_link"), new_paste_path, class: "pastes-new-link" %>

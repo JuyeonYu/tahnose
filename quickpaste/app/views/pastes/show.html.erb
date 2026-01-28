@@ -46,11 +46,11 @@
   </div>
 <% end %>
 
-<p>
+<div class="paste-links">
   <% if @manage_mode || (logged_in? && @paste.owner == current_user) %>
-    <%= link_to t("pastes.show.edit"), edit_paste_path(@paste) %> |
-    <%= link_to t("pastes.show.delete"), paste_path(@paste), data: { turbo_method: :delete, turbo_confirm: t("pastes.show.delete_confirm") } %> |
+    <%= link_to t("pastes.show.edit"), edit_paste_path(@paste), class: "login-button" %>
+    <%= link_to t("pastes.show.delete"), paste_path(@paste), class: "login-button", data: { turbo_method: :delete, turbo_confirm: t("pastes.show.delete_confirm") } %>
   <% end %>
 
-  <%= link_to t("pastes.show.list"), pastes_path %>
-</p>
+  <%= link_to t("pastes.show.list"), pastes_path, class: "login-button" %>
+</div>

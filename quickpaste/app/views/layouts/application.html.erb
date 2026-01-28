@@ -43,14 +43,21 @@
     <% end %>
 
     <header class="site-header">
-      <div class="container site-actions">
-        <% if logged_in? %>
-          <span class="current-user"><%= current_user.email %></span>
-          <%= link_to t("nav.my_pastes"), mine_pastes_path, class: "my-pastes-link" %>
-          <%= button_to t("common.actions.logout"), logout_path, method: :delete, form: { class: "logout-form" }, class: "logout-button" %>
-        <% else %>
-          <%= link_to t("common.actions.login"), login_path, class: "login-button" %>
+      <div class="container site-header-inner">
+        <%= link_to pastes_path, class: "site-brand" do %>
+          <%= image_tag "/favicon.svg", class: "site-logo", alt: t("app.name") %>
+          <span class="site-title"><%= t("app.name") %></span>
         <% end %>
+
+        <div class="site-actions">
+          <% if logged_in? %>
+            <span class="current-user"><%= current_user.email %></span>
+            <%= link_to t("nav.my_pastes"), mine_pastes_path, class: "my-pastes-link" %>
+            <%= button_to t("common.actions.logout"), logout_path, method: :delete, form: { class: "logout-form" }, class: "logout-button" %>
+          <% else %>
+            <%= link_to t("common.actions.login"), login_path, class: "login-button" %>
+          <% end %>
+        </div>
       </div>
     </header>
 

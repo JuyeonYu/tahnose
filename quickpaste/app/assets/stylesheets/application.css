@@ -95,12 +95,38 @@ pre {
   border-bottom: 1px solid var(--border);
 }
 
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  font-size: 14px;
+}
+
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
+
+.site-logo {
+  width: 50px;
+  height: 50px;
+}
+
+.site-title {
+  font-size: 24px;
+}
+
 .site-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: var(--space-3);
-  padding: var(--space-3) 0;
   font-size: 14px;
 }
 
@@ -152,6 +178,16 @@ form {
   justify-content: space-between;
   gap: var(--space-3);
   margin-bottom: var(--space-2);
+}
+
+.pastes-header-text h1 {
+  margin-bottom: 4px;
+}
+
+.pastes-header-subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .pastes-header-actions {
@@ -481,4 +517,11 @@ turbo-frame#flash,
   display: flex;
   justify-content: flex-end;
   margin-bottom: var(--space-2);
+}
+
+.paste-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--space-3);
 }

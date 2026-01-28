@@ -59,6 +59,7 @@ en:
   pastes:
     index:
       title: "Pastes"
+      subtitle: "See recent notes at a glance and find them quickly by tag."
       search_label: "Search"
       search_placeholder: "Tag or body"
       new_link: "New paste"
