@@ -1,4 +1,11 @@
-<div class="paste-list">
+<% if @pastes.empty? %>
+  <div class="paste-empty">
+    <p class="paste-empty-title"><%= t("pastes.index.empty_title") %></p>
+    <p class="paste-empty-subtitle"><%= t("pastes.index.empty_subtitle") %></p>
+    <%= link_to t("pastes.index.empty_all_link"), pastes_path, class: "paste-empty-link", data: { turbo_frame: "_top" } %>
+  </div>
+<% else %>
+  <div class="paste-list">
   <% @pastes.each do |paste| %>
     <% item_classes = ["paste-list-item"] %>
     <% item_classes << "paste-list-item--masked" if paste.locked? || paste.read_once %>
@@ -30,7 +37,8 @@
       <% end %>
     </div>
   <% end %>
-</div>
+  </div>
+<% end %>
 
 <% if @pagy.pages > 1 %>
   <% window_size = 5 %>

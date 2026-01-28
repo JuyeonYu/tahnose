@@ -60,6 +60,9 @@ en:
     index:
       title: "Pastes"
       subtitle: "See recent notes at a glance and find them quickly by tag."
+      empty_title: "No results"
+      empty_subtitle: "Try searching with a different tag."
+      empty_all_link: "View all"
       search_label: "Search"
       search_placeholder: "Tag or body"
       new_link: "New paste"
