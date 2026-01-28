@@ -142,6 +142,10 @@ pre {
     flex-wrap: wrap;
   }
 
+  .site-actions .login-button {
+    display: none;
+  }
+
   .current-user {
     width: 100%;
     margin-left: 4px;
