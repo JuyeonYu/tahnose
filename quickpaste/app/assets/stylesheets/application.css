@@ -130,6 +130,24 @@ pre {
   font-size: 14px;
 }
 
+@media (max-width: 640px) {
+  .site-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .current-user {
+    width: 100%;
+    margin-left: 4px;
+  }
+}
+
 .current-user {
   color: var(--muted);
 }
