@@ -131,6 +131,12 @@ class PastesController < ApplicationController
     render :show
   end
 
+  def confirm_read_once
+    @paste = Paste.find(params[:id])
+    session[read_once_session_key(@paste)] = true
+    redirect_to @paste
+  end
+
 
   private
 
@@ -158,6 +164,7 @@ class PastesController < ApplicationController
 
   def destroy_read_once_paste_after_show
     @paste.destroy
+    session.delete(read_once_session_key(@paste))
   end
 
   def unlocked?(paste)
@@ -176,7 +183,11 @@ class PastesController < ApplicationController
   end
 
   def read_once_confirmed?
-    params[:read_once_confirm].to_s == "1"
+    session[read_once_session_key(@paste)] == true
+  end
+
+  def read_once_session_key(paste)
+    "paste_read_once_confirmed_#{paste.id}"
   end
 
   def allow_owner_bypass!

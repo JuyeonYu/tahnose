@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get :mine
     end
     member do
+      post :confirm_read_once
       post :unlock
       get :manage
     end

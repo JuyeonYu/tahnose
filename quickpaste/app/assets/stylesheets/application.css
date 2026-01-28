@@ -561,6 +561,18 @@ turbo-frame#flash,
   margin-bottom: var(--space-2);
 }
 
+.read-once-warning {
+  margin-bottom: var(--space-3);
+}
+
+.read-once-actions {
+  margin-bottom: var(--space-3);
+}
+
+.read-once-list {
+  margin: 0;
+}
+
 .paste-links {
   display: flex;
   flex-wrap: wrap;

@@ -9,8 +9,10 @@
   <%= t("pastes.show.read_once_warning") %>
 </div>
 
-<%= link_to t("pastes.show.confirm_read_once"), paste_path(@paste, read_once_confirm: 1), class: "login-button" %>
+<div class="read-once-actions">
+  <%= button_to t("pastes.show.confirm_read_once"), confirm_read_once_paste_path(@paste), method: :post, class: "login-button", form: { class: "logout-form" } %>
+</div>
 
-<p>
-  <%= link_to t("pastes.show.list"), pastes_path %>
+<p class="read-once-list">
+  <%= link_to t("pastes.show.list"), pastes_path, class: "login-button" %>
 </p>
