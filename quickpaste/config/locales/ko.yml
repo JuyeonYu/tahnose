@@ -94,6 +94,8 @@ ko:
       confirm_read_once: "확인하고 읽기"
       copy: "복사"
       copied: "복사됨"
+      locked_via_owner: "작성자 본인으로 확인되어 비밀번호 입력 없이 열람 중"
+      locked_via_password: "비밀번호 인증됨"
       qr_loading: "QR 생성 중..."
       edit: "수정"
       delete: "삭제"

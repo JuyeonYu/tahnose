@@ -10,6 +10,17 @@
 
 <hr>
 
+<% if @paste.locked? && unlocked?(@paste) %>
+  <p class="paste-lock-status">
+    <% if paste_permission_via(@paste) == :owner %>
+      <%= t("pastes.show.locked_via_owner") %>
+    <% elsif paste_permission_via(@paste) == :password %>
+      <%= t("pastes.show.locked_via_password") %>
+    <% end %>
+  </p>
+  <hr>
+<% end %>
+
 <div
   data-controller="clipboard"
   data-clipboard-copy-label-value="<%= t("pastes.show.copy") %>"

@@ -94,6 +94,8 @@ en:
       confirm_read_once: "Confirm and read"
       copy: "Copy"
       copied: "Copied"
+      locked_via_owner: "🔒 Locked · opened as the owner without password"
+      locked_via_password: "🔒 Locked · password verified"
       qr_loading: "Generating QR..."
       edit: "Edit"
       delete: "Delete"

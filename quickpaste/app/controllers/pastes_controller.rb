@@ -1,5 +1,5 @@
 class PastesController < ApplicationController
-  helper_method :unlocked?
+  helper_method :unlocked?, :paste_permission_via
   PASTE_CREATE_IP_LIMIT = 15
   PASTE_CREATE_IP_PERIOD_SECONDS = 60
   SEARCH_IP_LIMIT = 15
@@ -118,7 +118,7 @@ class PastesController < ApplicationController
     @paste = Paste.find(params[:id])
 
     if @paste.authenticate(params[:password].to_s)
-      session[unlock_session_key(@paste)] = true
+      store_paste_permission(@paste, :password)
       redirect_to @paste
     else
       flash.now[:alert] = t("flash.pastes.invalid_password")
@@ -163,11 +163,18 @@ class PastesController < ApplicationController
   end
 
   def unlocked?(paste)
-    session[unlock_session_key(paste)] == true
+    paste_permission_via(paste).present?
   end
 
-  def unlock_session_key(paste)
-    "paste_unlocked_#{paste.id}"
+  def paste_permission_via(paste)
+    stored = session.dig(:paste_permissions, paste.id.to_s)
+    return stored.to_sym if stored.present?
+
+    return nil unless paste.locked?
+    return nil unless logged_in? && paste.owner == current_user
+
+    store_paste_permission(paste, :owner)
+    :owner
   end
 
   def read_once_confirmed?
@@ -175,7 +182,7 @@ class PastesController < ApplicationController
   end
 
   def allow_owner_bypass!
-    session[unlock_session_key(@paste)] = true if @paste.locked?
+    store_paste_permission(@paste, :owner) if @paste.locked?
   end
 
   def require_manage_token!
@@ -186,6 +193,7 @@ class PastesController < ApplicationController
     end
     # 한 번 성공하면 세션에 저장해두면 UX가 좋아짐(매번 token 붙일 필요 없음)
     store_session_manage_token(@paste, token) if params[:token].present?
+    store_paste_permission(@paste, :owner) if @paste.locked?
   end
 
   def session_manage_token_for(paste)
@@ -195,5 +203,10 @@ class PastesController < ApplicationController
   def store_session_manage_token(paste, token)
     session[:manage_tokens] ||= {}
     session[:manage_tokens][paste.id.to_s] = token
+  end
+
+  def store_paste_permission(paste, via)
+    session[:paste_permissions] ||= {}
+    session[:paste_permissions][paste.id.to_s] = via.to_s
   end
 end
