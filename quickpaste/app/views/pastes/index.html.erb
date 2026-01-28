@@ -2,20 +2,22 @@
   <div class="pastes-header">
     <div class="pastes-header-text">
       <h1><%= t("pastes.index.title") %></h1>
-      <p class="pastes-header-subtitle"><%= t("pastes.index.subtitle") %></p>
     </div>
     <div class="pastes-header-actions">
       <%= link_to t("pastes.index.reload"), url_for(q: @query.presence), class: "pastes-reload-button", data: { turbo_frame: "pastes_list" } %>
       <%= link_to t("pastes.index.new_link"), new_paste_path, class: "pastes-new-link" %>
     </div>
   </div>
+  <p class="pastes-header-subtitle"><%= t("pastes.index.subtitle") %></p>
 
   <%= form_with url: pastes_path, method: :get, local: true do |form| %>
     <div class="pastes-search">
       <%= form.label :q, t("pastes.index.search_label"), class: "pastes-search-label" %>
       <div class="pastes-search-row">
         <%= form.search_field :q, value: @query, placeholder: t("pastes.index.search_placeholder"), class: "pastes-search-field" %>
-        <%= form.submit t("common.actions.search"), class: "pastes-search-button" %>
+        <%= form.button t("common.actions.search"), type: "submit", class: "pastes-search-button", aria: { label: t("common.actions.search") } do %>
+          🔍
+        <% end %>
       </div>
     </div>
   <% end %>
