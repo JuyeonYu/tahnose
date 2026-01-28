@@ -143,8 +143,7 @@ class PastesController < ApplicationController
       :body,
       :tag,
       :read_once,
-      :password,
-      :password_confirmation
+      :password
     )
   end
 
@@ -152,8 +151,7 @@ class PastesController < ApplicationController
     params.require(:paste).permit(
       :body,
       :read_once,
-      :password,
-      :password_confirmation
+      :password
     )
   end
 

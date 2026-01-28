@@ -2,8 +2,11 @@ require "stringio"
 
 class Paste < ApplicationRecord
   MAX_QR_BYTES = 1200  # 시작값(예시). 운영하면서 조절
+  attr_accessor :password_enabled
+
   validates :body, presence: true
   validates :tag, presence: true, length: { maximum: 20 }
+  validates :password, presence: true, if: :password_required?
   validate :body_bytesize_within_limit
   has_secure_password validations: false
 
@@ -24,6 +27,11 @@ class Paste < ApplicationRecord
   end
 
   def locked?
+    password_digest.present?
+  end
+
+  def password_enabled?
+    return ActiveModel::Type::Boolean.new.cast(@password_enabled) unless @password_enabled.nil?
     password_digest.present?
   end
 
@@ -92,5 +100,9 @@ class Paste < ApplicationRecord
 
   def normalize_tag
     self.tag = tag.to_s.strip.downcase.presence
+  end
+
+  def password_required?
+    password_enabled? && password_digest.blank?
   end
 end

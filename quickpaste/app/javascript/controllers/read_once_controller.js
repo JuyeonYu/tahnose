@@ -6,7 +6,7 @@ export default class extends Controller {
     "passwordToggle",
     "passwordFields",
     "passwordInput",
-    "passwordConfirmInput",
+    "passwordRequiredMarker",
     "warning",
     "recommended"
   ]
@@ -31,7 +31,7 @@ export default class extends Controller {
     const showAdvisory = this.readOnceTarget.checked
     this.passwordFieldsTarget.hidden = !enabled
     this.passwordInputTarget.disabled = !enabled
-    this.passwordConfirmInputTarget.disabled = !enabled
+    this.passwordInputTarget.required = enabled
 
     if (this.hasWarningTarget) {
       this.warningTarget.hidden = !showAdvisory
@@ -41,9 +41,12 @@ export default class extends Controller {
       this.recommendedTarget.hidden = !showAdvisory
     }
 
+    if (this.hasPasswordRequiredMarkerTarget) {
+      this.passwordRequiredMarkerTarget.hidden = !enabled
+    }
+
     if (!enabled) {
       this.passwordInputTarget.value = ""
-      this.passwordConfirmInputTarget.value = ""
     }
   }
 }

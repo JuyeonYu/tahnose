@@ -32,6 +32,7 @@ ko:
     messages:
       must_be_in_future: "은(는) 미래여야 합니다"
       too_long_bytes: "은(는) %{count} bytes 이하여야 합니다. (현재: %{current} bytes)"
+      confirmation: "이(가) 일치하지 않습니다"
   nav:
     my_pastes: "내 글"
   flash:
@@ -83,8 +84,6 @@ ko:
       password_label: "비밀번호"
       password_option_label: "비밀번호로 보호"
       password_placeholder: "비밀글로 만들 때만 입력"
-      password_confirmation_label: "비밀번호 확인"
-      password_confirmation_placeholder: "비밀번호 재입력"
       read_once_label: "읽으면 바로 삭제"
       byte_unit: "bytes"
       recommended: "권장"
@@ -123,7 +122,6 @@ ko:
         body: "본문"
         tag: "태그"
         password: "비밀번호"
-        password_confirmation: "비밀번호 확인"
         read_once: "읽으면 바로 삭제"
       user:
         email: "이메일"

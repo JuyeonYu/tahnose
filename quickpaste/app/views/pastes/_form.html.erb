@@ -50,11 +50,10 @@
     </div>
 
     <div class="paste-password-fields" data-read-once-target="passwordFields">
-      <%= f.label :password, t("pastes.form.password_label") %><br>
+      <%= f.label :password, t("pastes.form.password_label") %>
+      <span class="required-marker" data-read-once-target="passwordRequiredMarker" hidden>*</span><br>
       <%= f.password_field :password, placeholder: t("pastes.form.password_placeholder"), data: { "read-once-target": "passwordInput" } %>
 
-      <%= f.label :password_confirmation, t("pastes.form.password_confirmation_label") %>
-      <%= f.password_field :password_confirmation, placeholder: t("pastes.form.password_confirmation_placeholder"), data: { "read-once-target": "passwordConfirmInput" } %>
     </div>
   </div>
 

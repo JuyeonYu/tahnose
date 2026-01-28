@@ -32,6 +32,7 @@ en:
     messages:
       must_be_in_future: "must be in the future"
       too_long_bytes: "must be %{count} bytes or fewer (current: %{current} bytes)"
+      confirmation: "doesn't match"
   nav:
     my_pastes: "My pastes"
   flash:
@@ -83,8 +84,6 @@ en:
       password_label: "Password"
       password_option_label: "Protect with password"
       password_placeholder: "Only if you want to lock this paste"
-      password_confirmation_label: "Password confirmation"
-      password_confirmation_placeholder: "Re-enter password"
       read_once_label: "Delete after read"
       byte_unit: "bytes"
       recommended: "recommended"
@@ -123,7 +122,6 @@ en:
         body: "Body"
         tag: "Tag"
         password: "Password"
-        password_confirmation: "Password confirmation"
         read_once: "Delete after read"
       user:
         email: "Email"
