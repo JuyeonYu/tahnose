@@ -16,6 +16,8 @@ class Paste < ApplicationRecord
 
   before_validation :normalize_tag
 
+  scope :notices, -> { where(notice: true) }
+
   scope :unlocked, -> { where(password_digest: [nil, ""]) }
 
   def self.search(query)

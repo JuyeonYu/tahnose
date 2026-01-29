@@ -60,6 +60,7 @@ ko:
     index:
       title: "Notes"
       subtitle: "최근 작성된 노트를 한눈에 보고, 태그로 빠르게 찾아보세요."
+      notice_label: "공지"
       empty_title: "검색 결과가 없습니다"
       empty_subtitle: "다른 태그로 다시 검색해보세요."
       empty_all_link: "전체보기"

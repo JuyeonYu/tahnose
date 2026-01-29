@@ -312,6 +312,13 @@ form {
   border-bottom: 1px solid var(--border);
 }
 
+.paste-list-item--notice {
+  padding: var(--space-2);
+  border-left: 3px solid #f0b970;
+  border-bottom: 1px dashed #f0caa5;
+  background: #fff7ea;
+}
+
 .paste-list-item--masked {
   color: var(--muted);
 }
@@ -368,6 +375,19 @@ form {
   background: #f6f7fb;
   color: var(--text);
   font-weight: 500;
+}
+
+.paste-tag-chip--notice {
+  background: #fff1dc;
+  border-color: #f2d1a2;
+  color: #6b3a00;
+  font-weight: 600;
+}
+
+.paste-list--notices {
+  padding: 0 0 var(--space-2);
+  margin-bottom: var(--space-2);
+  border-bottom: 2px solid var(--border);
 }
 
 .paste-meta {

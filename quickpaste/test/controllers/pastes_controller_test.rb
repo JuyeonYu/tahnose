@@ -71,6 +71,19 @@ class PastesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "index shows notices before regular pastes" do
+    notice_old = Paste.create!(body: "notice-old", tag: "notice", notice: true, created_at: 2.days.ago)
+    notice_new = Paste.create!(body: "notice-new", tag: "notice", notice: true, created_at: 1.day.ago)
+    normal = Paste.create!(body: "normal", tag: "regular", created_at: Time.current)
+
+    get pastes_path
+    assert_response :success
+
+    body = response.body
+    assert body.index("notice-new") < body.index("notice-old")
+    assert body.index("notice-old") < body.index("normal")
+  end
+
   private
 
   def log_in_as(user)

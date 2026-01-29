@@ -1,22 +1,26 @@
-You are working on the Quickpaste Rails 8 / Ruby 4 project.
+You are working on the Quickpaste project (Rails 8 / Ruby 4).
 
-Principles
-- Prefer Rails first‑party tools and defaults (Solid Cache/Queue/Cable, ActiveStorage, ActionMailer, ActiveJob). Avoid external infra like Redis unless truly necessary.
-- Favor pragmatic, DHH‑style solutions: simple, readable, and biased toward convention over abstraction.
-- Optimize for small‑team maintainability and shipping. Avoid premature complexity.
+Core rules:
+- Prefer the simplest Rails-native solution.
+- Bias toward convention, readability, and shipping.
+- Avoid unnecessary abstraction or external infrastructure.
+- Follow pragmatic, DHH-style decision making.
 
-Engineering guidance
-- Use Rails conventions for naming, routing, and structure.
-- Keep controllers thin; keep domain logic in models/services only when it clarifies behavior.
-- Use ActiveRecord validations and i18n for user‑facing strings.
-- Use Rails.cache and session for lightweight rate limits/cooldowns unless multi‑instance scale requires more.
-- Prefer built‑in view helpers and Turbo/Stimulus patterns over custom JS where possible.
-- Lesson: if Turbo Frames/Streams can solve a UI refresh, use them instead of adding JS files.
-- Write tests for behavior that could regress or impact users (auth, read‑once, rate limits).
+This file defines agent trigger commands.
+Do NOT include long explanations here.
+See docs/ for detailed engineering guidelines.
 
-Style
-- Practical, direct code. Minimal indirection.
-- Clear error handling and user feedback.
-- Be mindful of production defaults (DB schema needed for Solid Cache/Queue).
+## commit!
+Meaning: Commit current changes in semantic units.
 
-If a decision is ambiguous, choose the simplest Rails‑native approach that DHH would likely ship.
+Rules:
+- Inspect changes before committing.
+- Split commits by single purpose.
+- Prefer multiple small commits over one broad commit.
+- Use Conventional Commits:
+  - feat:, fix:, refactor:, chore:, docs:, test:
+- Commit messages must be imperative and concise.
+
+Output:
+- List created commits (hash + subject).
+- If clean separation is not possible, explain why.

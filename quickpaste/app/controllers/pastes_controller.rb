@@ -14,6 +14,7 @@ class PastesController < ApplicationController
   # GET /pastes/new
   def index
     @query = params[:q].to_s
+    @notices = []
 
     if @query.present?
       if @query.length < SEARCH_MIN_QUERY_LENGTH
@@ -34,7 +35,13 @@ class PastesController < ApplicationController
       end
     end
 
-    scope = Paste.search(@query).order(created_at: :desc)
+    scope = Paste.search(@query)
+    if @query.blank?
+      @notices = Paste.notices.order(created_at: :desc)
+      scope = scope.where(notice: false)
+    end
+
+    scope = scope.order(created_at: :desc)
     @pagy, @pastes = pagy(scope)
   end
 
