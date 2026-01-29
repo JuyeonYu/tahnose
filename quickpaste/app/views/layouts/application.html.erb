@@ -38,6 +38,13 @@
   </head>
 
   <body>
+    <div
+      id="ga-marker"
+      data-ga-event="<%= content_for?(:ga_event) ? yield(:ga_event) : "" %>"
+      data-ga-params="<%= content_for?(:ga_params) ? html_escape(yield(:ga_params)) : "" %>"
+      data-ga-nonce="<%= content_for?(:ga_nonce) ? yield(:ga_nonce) : SecureRandom.hex(8) %>"
+    ></div>
+
     <%= turbo_frame_tag 'flash' do %>
       <%= render 'shared/flash' %>
     <% end %>

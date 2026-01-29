@@ -2,13 +2,22 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["content", "button"]
-  static values = { copyLabel: String, copiedLabel: String }
+  static values = {
+    copyLabel: String,
+    copiedLabel: String,
+    pasteId: Number,
+    bodyBytes: Number,
+    isLoggedIn: Boolean
+  }
 
   copy() {
     const text = this.contentTarget.textContent
 
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(() => this.indicate())
+      navigator.clipboard.writeText(text).then(() => {
+        this.indicate()
+        this.trackCopy()
+      })
       return
     }
 
@@ -22,6 +31,7 @@ export default class extends Controller {
     document.execCommand("copy")
     textarea.remove()
     this.indicate()
+    this.trackCopy()
   }
 
   indicate() {
@@ -33,5 +43,16 @@ export default class extends Controller {
       const copyLabel = this.hasCopyLabelValue ? this.copyLabelValue : original
       this.buttonTarget.textContent = copyLabel
     }, 1200)
+  }
+
+  trackCopy() {
+    if (!window.GA4 || typeof window.GA4.event !== "function") return
+
+    window.GA4.event("copy_clicked", {
+      paste_id: this.hasPasteIdValue ? this.pasteIdValue : null,
+      body_bytes: this.hasBodyBytesValue ? this.bodyBytesValue : null,
+      copy_target: "body",
+      is_logged_in: this.hasIsLoggedInValue ? this.isLoggedInValue : false
+    })
   }
 }

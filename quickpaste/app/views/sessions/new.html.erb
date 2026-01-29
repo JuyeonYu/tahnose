@@ -1,3 +1,6 @@
+<% content_for :ga_event, "login_view" %>
+<% content_for :ga_params, { is_logged_in: false }.to_json %>
+
 <div
   class="session"
   data-controller="magic-link-resend"

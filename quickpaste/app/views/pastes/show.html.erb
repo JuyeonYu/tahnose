@@ -1,3 +1,6 @@
+<% content_for :ga_event, "paste_show" %>
+<% content_for :ga_params, { paste_id: @paste.id, body_bytes: @paste.body.to_s.bytesize, is_logged_in: logged_in? }.to_json %>
+
 <h1>
   <% if @paste.locked? %>
     <span class="paste-lock"><%= unlocked?(@paste) ? "🔓" : "🔒" %></span>
@@ -25,6 +28,9 @@
   data-controller="clipboard"
   data-clipboard-copy-label-value="<%= t("pastes.show.copy") %>"
   data-clipboard-copied-label-value="<%= t("pastes.show.copied") %>"
+  data-clipboard-paste-id-value="<%= @paste.id %>"
+  data-clipboard-body-bytes-value="<%= @paste.body.to_s.bytesize %>"
+  data-clipboard-is-logged-in-value="<%= logged_in? %>"
 >
   <div class="paste-actions">
     <button type="button" data-action="clipboard#copy" data-clipboard-target="button">

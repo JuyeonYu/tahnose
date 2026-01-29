@@ -95,7 +95,9 @@ class PastesController < ApplicationController
         flash[:manage_url] = t("flash.pastes.manage_link", url: @manage_url)
       end
 
-      redirect_to @paste, notice: t("flash.pastes.created"), status: :see_other
+      redirect_to paste_path(@paste, ga: "paste_created"),
+        notice: t("flash.pastes.created"),
+        status: :see_other
 
     else
       render :new, status: :unprocessable_entity
