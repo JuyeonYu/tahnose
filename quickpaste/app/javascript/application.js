@@ -3,3 +3,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "ga"
 import "ga4"
+
+import "trix"
+import "@rails/actiontext"
