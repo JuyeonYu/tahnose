@@ -37,8 +37,7 @@ class PastesController < ApplicationController
 
     scope = Paste.search(@query)
     if @query.blank?
-      @notices = Paste.notices.order(created_at: :desc)
-      scope = scope.where(notice: false)
+      @notices = Notice.order(created_at: :desc)
     end
 
     scope = scope.order(created_at: :desc)

@@ -4,6 +4,9 @@
       <h1><%= t("pastes.index.title") %></h1>
     </div>
     <div class="pastes-header-actions">
+      <% if admin? %>
+        <%= link_to t("pastes.index.new_notice"), new_notice_path, class: "pastes-new-notice-link" %>
+      <% end %>
       <%= link_to t("pastes.index.reload"), url_for(q: @query.presence), class: "pastes-reload-button", data: { turbo_frame: "pastes_list" } %>
       <%= link_to t("pastes.index.new_link"), new_paste_path, class: "pastes-new-link" %>
     </div>

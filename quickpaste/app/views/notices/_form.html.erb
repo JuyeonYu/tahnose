@@ -1,0 +1,29 @@
+<%= form_with model: notice, class: "notice-form" do |f| %>
+  <% if notice.errors.any? %>
+    <div class="notice-errors">
+      <h3><%= t("errors.template.header", count: notice.errors.count) %></h3>
+      <ul>
+        <% notice.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="notice-field">
+    <%= f.label :title, t("notices.form.title_label") %>
+    <span class="required-marker">*</span><br>
+    <%= f.text_field :title, required: true, placeholder: t("notices.form.title_placeholder") %>
+  </div>
+
+  <div class="notice-field">
+    <%= f.label :content, t("notices.form.content_label") %>
+    <span class="required-marker">*</span><br>
+    <%= f.rich_text_area :content %>
+  </div>
+
+  <div class="notice-actions">
+    <%= f.submit(notice.new_record? ? t("common.actions.create") : t("common.actions.save")) %>
+    <%= link_to t("common.actions.cancel"), root_path, class: "notice-cancel-link" %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<div class="notice-show">
+  <div class="notice-show-header">
+    <span class="paste-tag-chip paste-tag-chip--notice"><%= t("pastes.index.notice_label") %></span>
+    <h1 class="notice-show-title"><%= @notice.title %></h1>
+    <div class="notice-show-meta">
+      <%= t("pastes.index.time_ago", time: time_ago_in_words(@notice.created_at)) %>
+    </div>
+  </div>
+
+  <div class="notice-show-content trix-content">
+    <%= @notice.content.body %>
+  </div>
+
+  <div class="notice-show-actions">
+    <%= link_to t("common.actions.list"), root_path, class: "login-button" %>
+    <% if admin? %>
+      <%= link_to t("common.actions.edit"), edit_notice_path(@notice), class: "login-button" %>
+      <%= link_to t("common.actions.delete"), notice_path(@notice), method: :delete, data: { turbo_confirm: t("pastes.show.delete_confirm"), turbo_method: :delete }, class: "login-button" %>
+    <% end %>
+  </div>
+</div>

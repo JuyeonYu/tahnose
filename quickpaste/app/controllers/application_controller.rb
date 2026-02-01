@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   stale_when_importmap_changes
 
   # == Session-based Authentication (skeleton)
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :admin?
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
@@ -23,6 +23,15 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     current_user.present?
+  end
+
+  def admin?
+    return false unless current_user.present?
+
+    admin_email = ENV["ADMIN_EMAIL"].presence
+    return false unless admin_email
+
+    current_user.email == admin_email
   end
 
   # Use this as a before_action for pages that require authentication

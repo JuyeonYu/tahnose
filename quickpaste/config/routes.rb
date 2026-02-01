@@ -20,4 +20,6 @@ Rails.application.routes.draw do
       get :manage
     end
   end
+
+  resources :notices, only: %i[show new create edit update destroy]
 end

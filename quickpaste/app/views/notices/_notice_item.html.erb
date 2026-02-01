@@ -1,0 +1,15 @@
+<div class="paste-list-item paste-list-item--notice">
+  <%= link_to notice_path(notice), class: "notice-item-link", data: { turbo_frame: "_top" } do %>
+    <div class="notice-item-content">
+      <div class="paste-tags">
+        <span class="paste-tag-chip paste-tag-chip--notice"><%= t("pastes.index.notice_label") %></span>
+      </div>
+      <div class="notice-title"><%= notice.title %></div>
+      <div class="paste-meta">
+        <div class="paste-meta-right">
+          <%= t("pastes.index.time_ago", time: time_ago_in_words(notice.created_at)) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

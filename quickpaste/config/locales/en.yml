@@ -50,12 +50,25 @@ en:
       updated: "Paste updated."
       deleted: "Paste deleted."
       invalid_password: "Password is incorrect."
+    notices:
+      created: "Notice created."
+      updated: "Notice updated."
+      deleted: "Notice deleted."
   sessions:
     new:
       title: "Log in"
       email_label: "Email"
       request_link: "Send login link"
       resend_link: "Resend login link"
+  notices:
+    new:
+      title: "New notice"
+    edit:
+      title: "Edit notice"
+    form:
+      title_label: "Title"
+      title_placeholder: "Notice title"
+      content_label: "Content"
   pastes:
     index:
       title: "Pastes"
@@ -67,6 +80,7 @@ en:
       search_label: "Search"
       search_placeholder: "Tag or body"
       new_link: "New paste"
+      new_notice: "New notice"
       reload: "↻ Reload"
       prev: "Previous"
       next: "Next"

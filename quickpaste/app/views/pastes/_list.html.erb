@@ -7,8 +7,8 @@
 <% else %>
   <% if @notices.present? %>
     <div class="paste-list paste-list--notices">
-      <% @notices.each do |paste| %>
-        <%= render "list_item", paste: paste %>
+      <% @notices.each do |notice| %>
+        <%= render "notices/notice_item", notice: notice %>
       <% end %>
     </div>
   <% end %>

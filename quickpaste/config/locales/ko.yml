@@ -50,12 +50,25 @@ ko:
       updated: "수정되었습니다."
       deleted: "삭제되었습니다."
       invalid_password: "비밀번호가 올바르지 않습니다."
+    notices:
+      created: "공지가 등록되었습니다."
+      updated: "공지가 수정되었습니다."
+      deleted: "공지가 삭제되었습니다."
   sessions:
     new:
       title: "로그인"
       email_label: "이메일"
       request_link: "로그인 링크 받기"
       resend_link: "로그인 링크 재전송"
+  notices:
+    new:
+      title: "공지 작성"
+    edit:
+      title: "공지 수정"
+    form:
+      title_label: "제목"
+      title_placeholder: "공지 제목"
+      content_label: "내용"
   pastes:
     index:
       title: "Notes"
@@ -67,6 +80,7 @@ ko:
       search_label: "검색"
       search_placeholder: "태그를 검색해보세요."
       new_link: "새로 만들기"
+      new_notice: "공지 작성"
       reload: "↻ 새로고침"
       prev: "이전"
       next: "다음"
