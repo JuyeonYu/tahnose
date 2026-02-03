@@ -4,6 +4,8 @@ class SessionsController < ApplicationController
   MAGIC_LINK_IP_LIMIT = 5
   MAGIC_LINK_IP_PERIOD_SECONDS = 60
 
+  before_action :require_auth_enabled!
+
   def new
     prepare_magic_link_form
   end

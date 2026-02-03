@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   stale_when_importmap_changes
 
   # == Session-based Authentication (skeleton)
-  helper_method :current_user, :logged_in?, :admin?
+  helper_method :current_user, :logged_in?, :admin?, :auth_enabled?
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
 
+  def auth_enabled?
+    ENV.fetch("AUTH_ENABLED", "true").downcase == "true"
+  end
+
   def admin?
     return false unless current_user.present?
 
@@ -36,10 +40,18 @@ class ApplicationController < ActionController::Base
 
   # Use this as a before_action for pages that require authentication
   def require_login!
+    return unless auth_enabled?
     return if logged_in?
 
     store_return_to
     redirect_to login_path, alert: t("flash.sessions.login_required")
+  end
+
+  # Use this as a before_action for authentication-related pages
+  def require_auth_enabled!
+    return if auth_enabled?
+
+    redirect_to root_path
   end
 
   # Store return location so we can redirect back after magic-link login
